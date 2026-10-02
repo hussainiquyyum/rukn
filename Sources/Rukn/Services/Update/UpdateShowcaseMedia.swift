@@ -21,7 +21,7 @@ enum UpdateShowcaseInfo {
            FileManager.default.fileExists(atPath: url.path) {
             return url
         }
-        let desktopDemo = URL(fileURLWithPath: "/Users/rukn/Desktop/demo.gif")
+        let desktopDemo = FileManager.default.homeDirectoryForCurrentUser.appendingPathComponent("Desktop/demo.gif")
         return FileManager.default.fileExists(atPath: desktopDemo.path) ? desktopDemo : nil
     }
 

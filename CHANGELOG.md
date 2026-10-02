@@ -7,7 +7,7 @@ All notable changes to this project are documented here. The format follows
 ## [Unreleased]
 
 ### Summary
-On macOS 27 the Volume mixer can send a single app to an AirPlay speaker, clipboard searches highlight what they matched, and screenshots gain a Full screen button, an optional confirmation preview and a shortcut that uploads the latest capture as a temporary link. Dynamic Island shows song covers in Up next and keeps the playing song while a web player loads the next one, and its AI Agents page adds OpenCode and picks up where the last launch stopped instead of reading every log again. Volume and mute keys follow what the output really does after the Mac wakes, and brightness and volume keys pressed with Option, Command or Control reach macOS again.
+The app is now Rukn, a Hussaini Holding product. On macOS 27 the Volume mixer can send a single app to an AirPlay speaker, clipboard searches highlight what they matched, and screenshots gain a Full screen button, an optional confirmation preview and a shortcut that uploads the latest capture as a temporary link. Dynamic Island shows song covers in Up next and keeps the playing song while a web player loads the next one, and its AI Agents page adds OpenCode and picks up where the last launch stopped instead of reading every log again. Volume and mute keys follow what the output really does after the Mac wakes, and brightness and volume keys pressed with Option, Command or Control reach macOS again.
 
 ### Dynamic Island
 - The camera mirror fills the island's page instead of showing a small preview in the middle, and Stop camera sits over the image beside the camera picker.
@@ -32,6 +32,12 @@ On macOS 27 the Volume mixer can send a single app to an AirPlay speaker, clipbo
 - On macOS 27 and later, the Volume mixer can send one app to an AirPlay speaker while everything else keeps playing where it was. Choose AirPlay in the app's output menu, and Choose AirPlay speaker… in the same menu to pick or change the speaker, in the menu bar panel, Settings and the island's mixer page.
 - Clipboard searches highlight the words they matched in the history window, the menu bar panel's Clipboard tab and Dynamic Island's Clipboard page.
 - The screenshot selection shows a Full screen button near the top of the display under the pointer, which captures that whole display in one click.
+
+### Changed
+- The app is renamed from Vorssaint to Rukn, with a new bundle identifier (com.hussainiholding.rukn) and the Hussaini Holding logo for the app icon, menu bar icon and in-app mark. Permissions granted to the previous app are not carried over, so macOS asks again the first time each feature needs one.
+- Feedback buttons open the project's issue tracker on GitHub instead of an in-app form.
+- Temporary links for screenshots and recordings are unavailable until a link service is configured, and uploads fail without contacting any server.
+- The website, donation, Discord and X links and the donation prompts are removed.
 
 ### Fixed
 - Dynamic Island keeps the current song on screen while a web player loads the next one, instead of briefly showing another player's paused song. With the New track indicator on, a new song appears in the indicator before the compact island, even when it takes a while to load.
