@@ -277,7 +277,7 @@ struct BrandBadge: View {
         ZStack {
             RoundedRectangle(cornerRadius: size * 0.26, style: .continuous)
                 .fill(Theme.spaceGradient)
-            BrandMark(width: size * 0.8)
+            BrandMark(width: size * 0.5)
         }
         .frame(width: size, height: size)
     }
