@@ -5,7 +5,7 @@
 import Foundation
 
 enum FanControlIdentifiers {
-    static let teamID = "3D485NHW29"
+    static let teamID = "7PFTT5SJ28"
 
     #if RUKN_DEVELOPMENT
     static let appBundleID = "com.hussainiholding.rukn.dev"

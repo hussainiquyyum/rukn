@@ -124,7 +124,7 @@ jobs:
 
       - name: Verify release signature
         run: |
-          REQUIREMENT='identifier "com.hussainiholding.rukn" and anchor apple generic and certificate leaf[subject.OU] = "3D485NHW29"'
+          REQUIREMENT='identifier "com.hussainiholding.rukn" and anchor apple generic and certificate leaf[subject.OU] = "7PFTT5SJ28"'
           codesign --verify --deep --strict -R="$REQUIREMENT" build/stage/Rukn.app
 
       - name: Selftest
@@ -145,8 +145,8 @@ jobs:
         run: |
           DMG=$(ls dist/*.dmg | head -1)
           codesign --force --timestamp \
-            --sign 'Developer ID Application: Pedro Gomes (3D485NHW29)' "$DMG"
-          REQUIREMENT='anchor apple generic and certificate leaf[subject.OU] = "3D485NHW29"'
+            --sign '${{ vars.DEVELOPER_ID_IDENTITY || 'Developer ID Application: Syed Hussaini (7PFTT5SJ28)' }}' "$DMG"
+          REQUIREMENT='anchor apple generic and certificate leaf[subject.OU] = "7PFTT5SJ28"'
           codesign --verify --strict -R="$REQUIREMENT" "$DMG"
 
       - name: Notarize DMG
@@ -178,7 +178,7 @@ jobs:
       - name: Verify notarization
         run: |
           DMG=$(ls dist/*.dmg | head -1)
-          DMG_REQUIREMENT='anchor apple generic and certificate leaf[subject.OU] = "3D485NHW29"'
+          DMG_REQUIREMENT='anchor apple generic and certificate leaf[subject.OU] = "7PFTT5SJ28"'
           codesign --verify --strict -R="$DMG_REQUIREMENT" "$DMG"
           xcrun stapler validate "$DMG"
           MP=$(mktemp -d)
@@ -190,7 +190,7 @@ jobs:
           hdiutil attach -nobrowse -readonly -mountpoint "$MP" "$DMG"
           spctl -a -t exec -vv "$MP/Rukn.app" 2>&1 | tee /tmp/spctl.txt
           grep -q "source=Notarized Developer ID" /tmp/spctl.txt
-          REQUIREMENT='identifier "com.hussainiholding.rukn" and anchor apple generic and certificate leaf[subject.OU] = "3D485NHW29"'
+          REQUIREMENT='identifier "com.hussainiholding.rukn" and anchor apple generic and certificate leaf[subject.OU] = "7PFTT5SJ28"'
           codesign --verify --deep --strict -R="$REQUIREMENT" "$MP/Rukn.app"
           xcrun stapler validate "$MP/Rukn.app"
 
