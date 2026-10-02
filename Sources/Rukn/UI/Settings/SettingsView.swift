@@ -886,26 +886,6 @@ struct SupportSettings: View {
                         .foregroundStyle(.white)
                 }
 
-                VStack(spacing: 7) {
-                    Text(l10n.s.donateHeading)
-                        .font(.title2.bold())
-                        .multilineTextAlignment(.center)
-                    Text(l10n.s.donateMessage)
-                        .font(.system(size: 13.5))
-                        .foregroundStyle(.secondary)
-                        .multilineTextAlignment(.center)
-                        .fixedSize(horizontal: false, vertical: true)
-                        .frame(maxWidth: 460)
-                }
-
-                Button {
-                    openURL(AppInfo.coffeeURL)
-                } label: {
-                    Label(l10n.s.donateButton, systemImage: "cup.and.saucer.fill")
-                }
-                .buttonStyle(.borderedProminent)
-                .controlSize(.large)
-
                 HStack(alignment: .top, spacing: 14) {
                     Image(systemName: "star.fill")
                         .font(.system(size: 18, weight: .semibold))
@@ -938,89 +918,11 @@ struct SupportSettings: View {
                     RoundedRectangle(cornerRadius: 14, style: .continuous)
                         .strokeBorder(Color(nsColor: .separatorColor).opacity(0.45))
                 )
-
-                HStack(alignment: .top, spacing: 14) {
-                    DiscordMark(width: 24)
-                        .frame(width: 38, height: 38)
-                        .background(
-                            RoundedRectangle(cornerRadius: 10, style: .continuous)
-                                .fill(Color(red: 0.35, green: 0.40, blue: 0.94))
-                        )
-
-                    VStack(alignment: .leading, spacing: 7) {
-                        Text(l10n.s.discordIntroTitle)
-                            .font(.headline)
-                        Text(l10n.s.discordIntroMessage)
-                            .font(.system(size: 13))
-                            .foregroundStyle(.secondary)
-                            .fixedSize(horizontal: false, vertical: true)
-
-                        communityActions
-                            .padding(.top, 3)
-                    }
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                }
-                .padding(16)
-                .frame(maxWidth: 510)
-                .background(
-                    RoundedRectangle(cornerRadius: 14, style: .continuous)
-                        .fill(Color(nsColor: .controlBackgroundColor))
-                )
-                .overlay(
-                    RoundedRectangle(cornerRadius: 14, style: .continuous)
-                        .strokeBorder(Color(nsColor: .separatorColor).opacity(0.45))
-                )
-
-                Text(l10n.s.donateThanks)
-                    .font(.caption)
-                    .foregroundStyle(.tertiary)
             }
             .frame(maxWidth: .infinity)
             .padding(.horizontal, 28)
             .padding(.vertical, 26)
         }
-    }
-
-    private var communityActions: some View {
-        ViewThatFits(in: .horizontal) {
-            HStack(spacing: 9) {
-                discordButton
-                socialButton
-            }
-            VStack(alignment: .leading, spacing: 8) {
-                discordButton
-                socialButton
-            }
-        }
-    }
-
-    private var discordButton: some View {
-        Button {
-            openURL(AppInfo.discordURL)
-        } label: {
-            HStack(spacing: 8) {
-                DiscordMark(width: 19)
-                Text(l10n.s.discordIntroJoinButton)
-            }
-        }
-        .buttonStyle(.borderedProminent)
-        .controlSize(.large)
-        .tint(Color(red: 0.35, green: 0.40, blue: 0.94))
-    }
-
-    private var socialButton: some View {
-        Button {
-            openURL(AppInfo.socialURL)
-        } label: {
-            HStack(spacing: 7) {
-                XLogoShape()
-                    .fill(Color.primary, style: FillStyle(eoFill: true))
-                    .frame(width: 12, height: 12)
-                Text(l10n.s.communityIntroFollowButton)
-            }
-        }
-        .buttonStyle(.bordered)
-        .controlSize(.large)
     }
 }
 

@@ -2588,12 +2588,8 @@ Rukn 3.1.0 adds three optional tools: Clipboard History for saving and reusing c
 
 ## [2.17.3] - 2026-06-17
 
-### Website
-- Official site: [vorssaint.com](https://vorssaint.com).
-
 ### Added
-- Every update now opens a What's New window with the latest release notes and a
-  discreet vorssaint.com link.
+- Every update now opens a What's New window with the latest release notes.
 - The Uninstaller is now available directly in the menu panel's Utilities
   section, with drag-and-drop and Choose app support.
 - The menu panel header now includes a Buy Me a Coffee shortcut.

@@ -13,13 +13,10 @@
 </p>
 
 <p align="center">
-  <a href="https://vorssaint.com">Website</a> ·
   <a href="#install">Install</a> ·
   <a href="#everything-it-does">Features</a> ·
   <a href="#private-by-default">Privacy</a> ·
-  <a href="CHANGELOG.md">Changelog</a> ·
-  <a href="mailto:hello@vorssaint.com">Contact</a> ·
-  <a href="https://discord.gg/M6BwWH4BJp">Discord</a>
+  <a href="CHANGELOG.md">Changelog</a>
 </p>
 
 <p align="center">
@@ -28,22 +25,6 @@
   <a href="https://github.com/hussainiquyyum/mac-utils/actions/workflows/ci.yml"><img src="https://github.com/hussainiquyyum/mac-utils/actions/workflows/ci.yml/badge.svg?branch=main&event=push" alt="CI status"></a>
   <a href="#what-you-need"><img src="https://img.shields.io/badge/macOS-14%2B%20Apple%20Silicon-black" alt="macOS 14 and newer, Apple Silicon"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-GPL--3.0--or--later-blue" alt="License GPL 3.0 or later"></a>
-</p>
-
-<p align="center">
-  <a href="https://buymeacoffee.com/vorssaint">
-    <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" width="217" height="60" alt="Buy Me a Coffee">
-  </a>
-</p>
-
-<p align="center">
-  For anything private, email
-  <a href="mailto:hello@vorssaint.com"><strong>hello@vorssaint.com</strong></a>.
-</p>
-
-<p align="center">
-  <a href="https://trendshift.io/repositories/53716?utm_source=repository-badge&amp;utm_medium=badge&amp;utm_campaign=badge-repository-53716" target="_blank" rel="noopener noreferrer"><img src="https://trendshift.io/api/badge/repositories/53716" alt="hussainiquyyum/mac-utils | Trendshift" width="250" height="55"></a>
-  <a href="https://trendshift.io/repositories/53716?utm_source=trendshift-badge&amp;utm_medium=badge&amp;utm_campaign=badge-trendshift-53716" target="_blank" rel="noopener noreferrer"><img src="https://trendshift.io/api/badge/trendshift/repositories/53716/weekly?language=Swift" alt="hussainiquyyum/mac-utils | Trendshift weekly ranking" width="250" height="55"></a>
 </p>
 
 <p align="center">
@@ -235,18 +216,12 @@ See [troubleshooting](docs/TROUBLESHOOTING.md) for launch problems, permissions 
 
 ## Community
 
-Rukn went from first commit to the front of GitHub trending in three days, top of the Swift charts, and issues and pull requests have shaped every release since. Bug reports, feature ideas and translations are all welcome, starting from the [contributing guide](CONTRIBUTING.md).
-
-Rukn is free and will stay that way. If it earned its place in your menu bar, a star helps other people find it, and a [coffee](https://buymeacoffee.com/vorssaint) keeps the maintainer awake, with or without the Keep awake feature.
-
-## Acknowledgements
-
-- App icon designed by [@divisionseven](https://github.com/divisionseven)
+Bug reports, feature ideas and translations are welcome, starting from the [contributing guide](CONTRIBUTING.md). Rukn is free, and a star on the repository helps other people find it.
 
 ## License
 
-[GPL 3.0 or later](LICENSE), copyright 2026 Rukn. The license covers the source code; the Rukn name, logo and look are covered separately in [TRADEMARKS.md](TRADEMARKS.md).
+[GPL 3.0 or later](LICENSE). Copyright 2026 Hussaini Holding, including code copyright 2026 Vorssaint, retained as the license requires. The license covers the source code; the Rukn name and logo are covered separately in [TRADEMARKS.md](TRADEMARKS.md).
 
 <p align="center">
-  <sub>Made by <a href="https://x.com/vorssaint">@rukn</a></sub>
+  <sub>A Hussaini Holding product</sub>
 </p>

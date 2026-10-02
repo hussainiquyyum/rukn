@@ -82,7 +82,10 @@ enum ScreenshotSharingSupport {
         return true
     }
 
-    static let productionEndpoint = URL(string: "https://screenshots.vorssaint.com")!
+    /// No share backend is configured yet. The reserved `.invalid` TLD never
+    /// resolves, so uploads fail locally instead of reaching any third party.
+    /// Point this at your own service to enable share links.
+    static let productionEndpoint = URL(string: "https://share.invalid")!
     static let developerBundleIdentifier = "com.hussainiholding.rukn.dev"
     static let maximumUploadBytes = 25 * 1_024 * 1_024
 

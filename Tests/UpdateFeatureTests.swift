@@ -1242,7 +1242,7 @@ enum UpdateFeatureTests {
         ![Menu bar temperature metrics](Resources/Images/menu-bar-temperature-metrics.png)
 
         ### Website
-        - Official site: [vorssaint.com](https://vorssaint.com).
+        - Official site: [example.com](https://example.com).
 
         ## [2.17.1] - 2026-06-17
 

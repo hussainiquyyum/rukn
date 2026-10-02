@@ -46,7 +46,10 @@ enum RecordingSharingSupport {
         let audioBitRate: Int
     }
 
-    static let productionEndpoint = URL(string: "https://screenshots.vorssaint.com")!
+    /// No share backend is configured yet. The reserved `.invalid` TLD never
+    /// resolves, so uploads fail locally instead of reaching any third party.
+    /// Point this at your own service to enable share links.
+    static let productionEndpoint = URL(string: "https://share.invalid")!
     static let developerBundleIdentifier = "com.hussainiholding.rukn.dev"
     /// Leaves transport headroom below the public 100 MB request ceiling.
     static let maximumUploadBytes = 96_000_000
