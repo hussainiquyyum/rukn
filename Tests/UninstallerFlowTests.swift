@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 // Copyright (C) 2026 Vorssaint
+// Copyright (C) 2026 Hussaini Holding
 
 import AppKit
 import Carbon.HIToolbox
@@ -197,7 +198,7 @@ enum UninstallerFlowTests {
                 let contents = url.appendingPathComponent("Contents", isDirectory: true)
                 try fm.createDirectory(at: contents, withIntermediateDirectories: true)
                 let data = try PropertyListSerialization.data(fromPropertyList: [
-                    "CFBundleIdentifier": "org.vorssaint.fixture.\(name)",
+                    "CFBundleIdentifier": "org.rukn.fixture.\(name)",
                     "CFBundlePackageType": "APPL", "CFBundleName": name,
                 ], format: .xml, options: 0)
                 try data.write(to: contents.appendingPathComponent("Info.plist"))

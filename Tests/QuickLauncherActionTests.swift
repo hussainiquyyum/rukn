@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 // Copyright (C) 2026 Vorssaint
+// Copyright (C) 2026 Hussaini Holding
 
 import Foundation
 import Carbon.HIToolbox
@@ -80,7 +81,7 @@ enum QuickLauncherContract {
     enum CleaningModeManager { static let shared = Spy(name: "cleaning") }
 
     static func run(_ suite: TestSuite) {
-        let domain = "com.vorssaint.tests.quick-launcher-presentation"
+        let domain = "com.hussainiholding.rukn.tests.quick-launcher-presentation"
         let defaults = UserDefaults(suiteName: domain)!
         defaults.removePersistentDomain(forName: domain)
         ReviewDefaults.current = defaults

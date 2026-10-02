@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 // Copyright (C) 2026 Vorssaint
+// Copyright (C) 2026 Hussaini Holding
 
 import Foundation
 
@@ -239,9 +240,9 @@ enum AgentUsageArchiveTests {
         // may parse differently.
         let release: [String: Any] = ["CFBundleShortVersionString": "3.5", "CFBundleVersion": "120"]
         var developer = release
-        developer["VorssaintBuildCommit"] = "abc1234 · 2026-10-01 09:00"
+        developer["RuknBuildCommit"] = "abc1234 · 2026-10-01 09:00"
         var rebuilt = release
-        rebuilt["VorssaintBuildCommit"] = "abc1234-dirty · 2026-10-01 09:05"
+        rebuilt["RuknBuildCommit"] = "abc1234-dirty · 2026-10-01 09:05"
         suite.expect(AgentUsageArchive.build(info: release) == "3.5-120"
                         && AgentUsageArchive.build(info: developer) != AgentUsageArchive.build(info: release)
                         && AgentUsageArchive.build(info: developer) != AgentUsageArchive.build(info: rebuilt),
@@ -393,7 +394,7 @@ enum AgentUsageArchiveSettleTests {
     }
 
     class Fixture {
-        let queue = DispatchQueue(label: "com.vorssaint.agent-usage.settle-test")
+        let queue = DispatchQueue(label: "com.hussainiholding.rukn.agent-usage.settle-test")
         var saved = 0
         func saveProgress() { saved += 1 }
     }

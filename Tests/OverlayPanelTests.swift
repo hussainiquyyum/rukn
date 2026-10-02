@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 // Copyright (C) 2026 Vorssaint
+// Copyright (C) 2026 Hussaini Holding
 
 import AppKit
 
@@ -23,31 +24,31 @@ enum OverlayPanelTests {
         // HUDs, previews, pickers and the menu's positioning helper: none is a
         // document window, and each floats over other apps' windows.
         let surfaces = [
-            "Sources/Vorssaint/App/AppDelegate.swift",
-            "Sources/Vorssaint/UI/PermissionGuideOverlay.swift",
-            "Sources/Vorssaint/UI/QuitProtection/QuitProtectionHUD.swift",
-            "Sources/Vorssaint/Services/QuickTools/QuickToolHUD.swift",
-            "Sources/Vorssaint/Services/QuickTools/QuickLauncherService.swift",
-            "Sources/Vorssaint/Services/QuickTools/CameraPreviewService.swift",
-            "Sources/Vorssaint/Services/QuickTools/RecentCaptureService.swift",
-            "Sources/Vorssaint/Services/QuickTools/ScreenshotSelectionController.swift",
-            "Sources/Vorssaint/Services/QuickTools/ScreenshotQuickPreviewController.swift",
-            "Sources/Vorssaint/Services/QuickTools/ScreenshotPinController.swift",
-            "Sources/Vorssaint/Services/QuickTools/QRResultController.swift",
-            "Sources/Vorssaint/Services/QuickTools/ScratchpadService.swift",
-            "Sources/Vorssaint/Services/Snippets/SnippetLibraryService.swift",
-            "Sources/Vorssaint/Services/Clipboard/ClipboardHistoryService.swift",
-            "Sources/Vorssaint/Services/CommandBar/CommandBarService.swift",
-            "Sources/Vorssaint/Services/Switcher/AppSwitcher.swift",
-            "Sources/Vorssaint/Services/RadialMenu/RadialMenuService.swift",
-            "Sources/Vorssaint/Services/RadialMenu/RadialNowPlayingService.swift",
-            "Sources/Vorssaint/Services/DockPreview/DockPreviewService.swift",
-            "Sources/Vorssaint/Services/WindowLayout/WindowLayoutService.swift",
-            "Sources/Vorssaint/Services/DiskImageInstaller/DiskImageInstallerService.swift",
-            "Sources/Vorssaint/Services/Finder/FinderCutPaste.swift",
-            "Sources/Vorssaint/Services/Display/BrightnessOSD.swift",
-            "Sources/Vorssaint/Services/CleaningMode/CleaningModeManager.swift",
-            "Sources/Vorssaint/Services/Recorder/RecorderIndicator.swift",
+            "Sources/Rukn/App/AppDelegate.swift",
+            "Sources/Rukn/UI/PermissionGuideOverlay.swift",
+            "Sources/Rukn/UI/QuitProtection/QuitProtectionHUD.swift",
+            "Sources/Rukn/Services/QuickTools/QuickToolHUD.swift",
+            "Sources/Rukn/Services/QuickTools/QuickLauncherService.swift",
+            "Sources/Rukn/Services/QuickTools/CameraPreviewService.swift",
+            "Sources/Rukn/Services/QuickTools/RecentCaptureService.swift",
+            "Sources/Rukn/Services/QuickTools/ScreenshotSelectionController.swift",
+            "Sources/Rukn/Services/QuickTools/ScreenshotQuickPreviewController.swift",
+            "Sources/Rukn/Services/QuickTools/ScreenshotPinController.swift",
+            "Sources/Rukn/Services/QuickTools/QRResultController.swift",
+            "Sources/Rukn/Services/QuickTools/ScratchpadService.swift",
+            "Sources/Rukn/Services/Snippets/SnippetLibraryService.swift",
+            "Sources/Rukn/Services/Clipboard/ClipboardHistoryService.swift",
+            "Sources/Rukn/Services/CommandBar/CommandBarService.swift",
+            "Sources/Rukn/Services/Switcher/AppSwitcher.swift",
+            "Sources/Rukn/Services/RadialMenu/RadialMenuService.swift",
+            "Sources/Rukn/Services/RadialMenu/RadialNowPlayingService.swift",
+            "Sources/Rukn/Services/DockPreview/DockPreviewService.swift",
+            "Sources/Rukn/Services/WindowLayout/WindowLayoutService.swift",
+            "Sources/Rukn/Services/DiskImageInstaller/DiskImageInstallerService.swift",
+            "Sources/Rukn/Services/Finder/FinderCutPaste.swift",
+            "Sources/Rukn/Services/Display/BrightnessOSD.swift",
+            "Sources/Rukn/Services/CleaningMode/CleaningModeManager.swift",
+            "Sources/Rukn/Services/Recorder/RecorderIndicator.swift",
         ]
         for path in surfaces {
             let source = (try? String(contentsOfFile: path, encoding: .utf8)) ?? ""

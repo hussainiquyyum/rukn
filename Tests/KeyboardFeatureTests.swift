@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 // Copyright (C) 2026 Vorssaint
+// Copyright (C) 2026 Hussaini Holding
 
 import AppKit
 import Carbon.HIToolbox
@@ -149,7 +150,7 @@ enum KeyboardFeatureTests {
         // symbols rather than on the private member holding them, so renaming
         // it stays green and dropping the ASCII-capable lookup goes red.
         let shortcutSource = (try? String(
-            contentsOfFile: "Sources/Vorssaint/Core/GlobalShortcut.swift",
+            contentsOfFile: "Sources/Rukn/Core/GlobalShortcut.swift",
             encoding: .utf8)) ?? ""
         let shortcutCode = shortcutSource.split(separator: "\n", omittingEmptySubsequences: false)
             .filter { !$0.trimmingCharacters(in: .whitespaces).hasPrefix("//") }

@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 // Copyright (C) 2026 Vorssaint
+// Copyright (C) 2026 Hussaini Holding
 
 import Foundation
 import SQLite3
@@ -2294,7 +2295,7 @@ enum NotchAgentTests {
     // MARK: Preferences and layout
 
     private static func preferences(_ suite: TestSuite) {
-        let domain = "com.vorssaint.tests.notch-agents"
+        let domain = "com.hussainiholding.rukn.tests.notch-agents"
         let defaults = UserDefaults(suiteName: domain)!
         defaults.removePersistentDomain(forName: domain)
         defer { defaults.removePersistentDomain(forName: domain) }

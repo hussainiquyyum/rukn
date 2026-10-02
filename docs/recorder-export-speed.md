@@ -15,7 +15,7 @@ Run on a supported Mac:
 ```sh
 ./build.sh --test-suite=recorder
 ./build.sh --dev
-./build/VorssaintDeveloper --selftest
+./build/RuknDeveloper --selftest
 ```
 
 `RecorderExportSpeedTests` is registered in the recorder suite and covers legacy decoding, custom-speed persistence, invalid values and bounds, inverse clock conversion, trim/cut ordering, unchanged preview timing, visual presets and GIF budgets. The recorder suite also runs `RecorderExportRenderingTests` through the production AVFoundation exporter. Synthetic video and two audio tracks cover fractional and endpoint speeds, trim and cut boundaries, blur coverage and clear frames, duration, delayed microphone, silence, pitch, gain, mute, GIF frame count and cancellation. These checks do not exercise native control layout or physical capture hardware.

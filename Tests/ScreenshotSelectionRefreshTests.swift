@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 // Copyright (C) 2026 Vorssaint
+// Copyright (C) 2026 Hussaini Holding
 
 import AppKit
 import Foundation
@@ -30,7 +31,7 @@ enum ScreenshotSelectionRefreshContract {
     }
     enum DefaultsKey {
         static let screenshotFreeze = "freeze", screenshotIncludePointer = "pointer",
-            screenshotHideVorssaintWindows = "hide"
+            screenshotHideRuknWindows = "hide"
     }
     struct ReviewDefaults {
         static var current = ReviewDefaults()
@@ -97,20 +98,20 @@ enum ScreenshotSelectionRefreshContract {
         }
         static var requests = [Request]()
         static func captureAllDisplays(
-            includePointer: Bool, hideVorssaintWindows: Bool, protectedWindowIDs: Set<CGWindowID>
+            includePointer: Bool, hideRuknWindows: Bool, protectedWindowIDs: Set<CGWindowID>
         ) async -> [CGDirectDisplayID: CGImage] {
             let excluded = ScreenshotCapturePolicy.excludedWindowIDs(
-                hideVorssaintWindows: hideVorssaintWindows, ownWindowIDs: [11, 12, 13],
+                hideRuknWindows: hideRuknWindows, ownWindowIDs: [11, 12, 13],
                 protectedWindowIDs: protectedWindowIDs)
             return await withCheckedContinuation {
                 requests.append(Request(excluded: excluded, continuation: $0))
             }
         }
-        static func pickableWindows(hideVorssaintWindows: Bool, protectedWindowIDs: Set<CGWindowID>)
+        static func pickableWindows(hideRuknWindows: Bool, protectedWindowIDs: Set<CGWindowID>)
             -> [(id: CGWindowID, bounds: CGRect)]
         {
             ScreenshotCapturePolicy.canPickWindow(
-                11, isOwnWindow: true, hideVorssaintWindows: hideVorssaintWindows,
+                11, isOwnWindow: true, hideRuknWindows: hideRuknWindows,
                 protectedWindowIDs: protectedWindowIDs)
                 ? [(CGWindowID(11), CGRect(x: 0, y: 0, width: 50, height: 50))] : []
         }
@@ -156,7 +157,7 @@ enum ScreenshotSelectionRefreshContract {
         var capturePolicy: ScreenshotSupport.UnifiedCapturePolicy
         var freeze: Bool
         var includePointer: Bool
-        var hideVorssaintWindows: Bool
+        var hideRuknWindows: Bool
         var sourceRefreshPending = false
         var sourceGeneration = 0, finished = false, scrollingCaptureEnabled = false,
             loupeEnabled = false, selectionInProgress = false
@@ -175,11 +176,11 @@ enum ScreenshotSelectionRefreshContract {
             let p = ScreenshotSupport.unifiedCapturePolicy(
                 for: tool, screenshotFreeze: d.bool(forKey: "freeze"),
                 screenshotIncludePointer: d.bool(forKey: "pointer"),
-                screenshotHideVorssaintWindows: d.bool(forKey: "hide"))
+                screenshotHideRuknWindows: d.bool(forKey: "hide"))
             capturePolicy = p
             freeze = p.freeze
             includePointer = p.includePointer
-            hideVorssaintWindows = p.hideVorssaintWindows
+            hideRuknWindows = p.hideRuknWindows
             let ids: Set<CGWindowID> = p.keepsContentWindowsOut ? [11, 12, 13] : [12]
             panels = [ScreenshotOverlayPanel(1, ids), ScreenshotOverlayPanel(2, ids)]
             for panel in panels {

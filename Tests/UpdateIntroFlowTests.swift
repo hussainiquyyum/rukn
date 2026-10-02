@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 // Copyright (C) 2026 Vorssaint
+// Copyright (C) 2026 Hussaini Holding
 
 import AppKit
 
@@ -58,7 +59,7 @@ enum UpdateIntroFlowTests {
     }
 
     static func run(_ suite: TestSuite) {
-        let domain = "com.vorssaint.tests.update-intros.\(UUID().uuidString)"
+        let domain = "com.hussainiholding.rukn.tests.update-intros.\(UUID().uuidString)"
         UserDefaults.standard = Foundation.UserDefaults(suiteName: domain)!
         defer {
             UserDefaults.standard.removePersistentDomain(forName: domain)

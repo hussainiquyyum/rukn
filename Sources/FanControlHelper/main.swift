@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 // Copyright (C) 2026 Vorssaint
+// Copyright (C) 2026 Hussaini Holding
 
 import Darwin
 import Foundation
@@ -8,8 +9,8 @@ import os
 private let log = Logger(subsystem: FanControlIdentifiers.helperID, category: "FanControl")
 
 private final class FanControlOwnership {
-    private let lockPath = "/var/run/vorssaint-fan-control.lock"
-    private let markerPath = "/var/run/vorssaint-fan-control.active"
+    private let lockPath = "/var/run/rukn-fan-control.lock"
+    private let markerPath = "/var/run/rukn-fan-control.active"
     private var lockFile: Int32 = -1
 
     var isHeld: Bool { lockFile >= 0 }
@@ -81,7 +82,7 @@ private final class FanControlOwnership {
 }
 
 private final class FanControlController {
-    private let queue = DispatchQueue(label: "com.vorssaint.fan-control.helper")
+    private let queue = DispatchQueue(label: "com.hussainiholding.rukn.fan-control.helper")
     private let ownership = FanControlOwnership()
     private var hardware: FanControlHardware?
     private var owner: UUID?

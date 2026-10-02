@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 // Copyright (C) 2026 Vorssaint
+// Copyright (C) 2026 Hussaini Holding
 
 import Foundation
 
@@ -292,7 +293,7 @@ enum NotchMusicExtrasTests {
         suite.expect(NotchPlayback.decode(noPosition)?.hasPosition == false,
                "missing player position never masquerades as a synchronized lyric clock")
 
-        let domain = "com.vorssaint.tests.notch-music-extras"
+        let domain = "com.hussainiholding.rukn.tests.notch-music-extras"
         let defaults = UserDefaults(suiteName: domain)!
         defaults.removePersistentDomain(forName: domain)
         defer { defaults.removePersistentDomain(forName: domain) }

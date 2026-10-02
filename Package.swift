@@ -1,11 +1,12 @@
 // swift-tools-version:5.9
 // SPDX-License-Identifier: GPL-3.0-or-later
 // Copyright (C) 2026 Vorssaint
+// Copyright (C) 2026 Hussaini Holding
 
 import PackageDescription
 
 let package = Package(
-    name: "Vorssaint",
+    name: "Rukn",
     platforms: [.macOS(.v14)],
     targets: [
         .systemLibrary(
@@ -17,9 +18,9 @@ let package = Package(
             path: "Sources/VMStatisticsCompat"
         ),
         .executableTarget(
-            name: "Vorssaint",
+            name: "Rukn",
             dependencies: ["VMStatisticsCompat", "HIDEventSystem"],
-            path: "Sources/Vorssaint"
+            path: "Sources/Rukn"
         )
     ]
 )

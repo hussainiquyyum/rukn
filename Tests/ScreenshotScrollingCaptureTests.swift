@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 // Copyright (C) 2026 Vorssaint
+// Copyright (C) 2026 Hussaini Holding
 
 import AppKit
 
@@ -25,7 +26,7 @@ enum ScreenshotScrollingCaptureTests {
         static var source: Source!
         static var preparations = 0
         static func prepareDisplayRegion(displayID: CGDirectDisplayID, pixelRect: CGRect,
-                                         includePointer: Bool, hideVorssaintWindows: Bool,
+                                         includePointer: Bool, hideRuknWindows: Bool,
                                          protectedWindowIDs: Set<CGWindowID>) async -> Source? {
             preparations += 1
             return source
@@ -156,7 +157,7 @@ enum ScreenshotScrollingCaptureTests {
             ScreenshotCaptureEngine.source = .init(frames, finish: signal)
             ScreenshotCaptureEngine.preparations = 0
             let result = await ScreenshotScrollingCapture.capture(
-                region: region, includePointer: false, hideVorssaintWindows: true,
+                region: region, includePointer: false, hideRuknWindows: true,
                 protectedWindowIDs: [], finishSignal: signal, onProgress: { _ in })
             suite.expect(ScreenshotCaptureEngine.preparations == 1,
                          "scrolling session resolves its capture configuration only once")
@@ -211,7 +212,7 @@ enum ScreenshotScrollingCaptureTests {
         ScreenshotCaptureEngine.source = .init([frame(offset: 0)], finish: signal)
         let cancelled = Task {
             await ScreenshotScrollingCapture.capture(
-                region: region, includePointer: false, hideVorssaintWindows: true,
+                region: region, includePointer: false, hideRuknWindows: true,
                 protectedWindowIDs: [], finishSignal: signal, onProgress: { _ in })
         }
         cancelled.cancel()

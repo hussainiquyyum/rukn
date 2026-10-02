@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 // Copyright (C) 2026 Vorssaint
+// Copyright (C) 2026 Hussaini Holding
 
 import Foundation
 
@@ -148,7 +149,7 @@ enum CleanerEligibilityTests {
     static func run(_ suite: TestSuite) {
         let manager = FileManager.default
         let root = manager.temporaryDirectory.resolvingSymlinksInPath()
-            .appendingPathComponent("vorssaint-cleaner-\(UUID().uuidString)", isDirectory: true)
+            .appendingPathComponent("rukn-cleaner-\(UUID().uuidString)", isDirectory: true)
         fixtureRoot = root
         defer { fixtureRoot = nil; try? manager.removeItem(at: root) }
         do {

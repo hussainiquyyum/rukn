@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 // Copyright (C) 2026 Vorssaint
+// Copyright (C) 2026 Hussaini Holding
 
 import Foundation
 import ObjectiveC
@@ -69,7 +70,7 @@ enum NotchPlaybackRoutingContract {
     static func isMusicApp(_ app: NSRunningApplication, parentBundleIdentifier: String? = nil) -> Bool {
         app.processIdentifier == 10
     }
-    static func vorssaintNowPlayingGet() { refreshes += 1 }
+    static func ruknNowPlayingGet() { refreshes += 1 }
     typealias NotchNativePlayback = NotchPlaybackRoutingContract
     enum NotchNativeQueue {
         static var request: UUID?

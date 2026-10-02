@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 // Copyright (C) 2026 Vorssaint
+// Copyright (C) 2026 Hussaini Holding
 
 // Generates all icon assets:
 // - the app iconset and .icns from the exported Default rendition of the
@@ -124,7 +125,7 @@ let menuBarGlyphHeight: CGFloat = 12.5
 let menuBarGlyphDrop: CGFloat = 1
 // Taller than the mark needs: the same canvas holds the compact Keep Awake
 // symbols. Keep in sync with BlackHoleGlyph.pointSize in
-// Sources/Vorssaint/App/StatusItemController.swift; `--selftest` enforces it.
+// Sources/Rukn/App/StatusItemController.swift; `--selftest` enforces it.
 let menuBarCanvas = (width: 26, height: 20)
 
 func renderMenuBarIcon(scale: Int) -> Data? {

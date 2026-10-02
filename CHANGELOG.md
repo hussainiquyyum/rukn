@@ -47,7 +47,7 @@ On macOS 27 the Volume mixer can send a single app to an AirPlay speaker, clipbo
 - On a Mac with a notch, a Dynamic Island page title too long for the space beside the camera, such as Camera mirror on some displays, now moves to a row below the camera instead of being cut off. Titles that fit stay beside the camera.
 - While Dynamic Island or Show brightness when adjusting shows the brightness, the brightness keys ease the display to each new level as macOS does, instead of jumping to it. Display brightness shortcuts ease the same way.
 - After the Mac wakes from sleep, volume and mute keys routed through Dynamic Island start from what the output really does, so external speakers no longer jump to a level far from the one the island showed and the mute key no longer does nothing.
-- Brightness and volume keys pressed with Option, Command or Control reach macOS again while Vorssaint handles those keys, so Option opens Displays or Sound settings. Option-Shift brightness keys take quarter steps and still follow the pointer to the right display.
+- Brightness and volume keys pressed with Option, Command or Control reach macOS again while Rukn handles those keys, so Option opens Displays or Sound settings. Option-Shift brightness keys take quarter steps and still follow the pointer to the right display.
 - Cancelling a GIF export from the recording editor no longer leaves a hidden empty file in the folder it was saving to.
 - Uninstalling with `Tools/uninstall.sh` now removes the password-free closed-lid rule, which the script used to leave behind.
 - The Uninstaller's app pickers and the Command Bar's Uninstall Application list offer only apps it can remove, so Apple's App Store apps, iPhone and iPad apps and linked apps no longer lead back to an empty drop zone. A refused app or a link dragged from a browser springs back from the drop zone instead.
@@ -58,7 +58,7 @@ Thanks to @69grcv8vfm-sys, @AlirezaBs, @bebricoOOOOOOf, @benjaminbelloeil, @benj
 ## [3.4.1-beta.1] - 2026-09-29
 
 ### Summary
-This beta takes Dynamic Island beyond the notch. It floats as a capsule on displays without one, can show on every display at once and now also appears on the Lock Screen. The menu bar panel gets a cleaner layout and opens centered again on macOS 14 and 15, and Siri AI on macOS 27 no longer opens Vorssaint's Settings.
+This beta takes Dynamic Island beyond the notch. It floats as a capsule on displays without one, can show on every display at once and now also appears on the Lock Screen. The menu bar panel gets a cleaner layout and opens centered again on macOS 14 and 15, and Siri AI on macOS 27 no longer opens Rukn's Settings.
 
 ### Highlights
 - **A floating capsule.** On external monitors and Macs without a notch, Dynamic Island floats in the middle of the menu bar and opens from it, like a phone's island. Settings → Dynamic Island → Layout → Displays without a notch.
@@ -95,7 +95,7 @@ This beta takes Dynamic Island beyond the notch. It floats as a capsule on displ
 
 ### Added
 - Command Bar previews a color typed on its own and converts it with "to hex", "to rgb", "to hsl" or "to swift". Return copies it.
-- The Vorssaint menu bar icon can be replaced with a symbol from a gallery, or with any SF Symbol typed by name. Settings → Menu bar → Menu bar icon.
+- The Rukn menu bar icon can be replaced with a symbol from a gallery, or with any SF Symbol typed by name. Settings → Menu bar → Menu bar icon.
 - Scratchpad adds a formatting toolbar in both the floating pad and Dynamic Island, opened from its Formatting button, and native text search with Command-F. Its text size is set in Settings → Scratchpad → Text size.
 - The Shelf shortcut can add the files selected in Finder. Turn on Add the Finder selection with the shortcut in Settings → Shelf.
 - App Updates can skip one version of an app or stop checking an app altogether, so it stays out of update results and alerts. Right-click the app in Settings → App updates or in the menu bar panel. Choices can be undone under Update rules on the same page.
@@ -118,7 +118,7 @@ This beta takes Dynamic Island beyond the notch. It floats as a capsule on displ
 - Volume keys play the macOS feedback click again while Dynamic Island shows the volume, following the system's Play feedback when volume is changed setting and Shift.
 - Setting the volume from Command Bar no longer adds a floating confirmation under the volume notice in Dynamic Island.
 - Dynamic Island stops the Claude Code timer as soon as its session is quit or its terminal closes in the middle of a task, instead of counting for up to ten more minutes.
-- AI Agents no longer keeps Vorssaint busy for minutes after launch on Macs with a long Codex history.
+- AI Agents no longer keeps Rukn busy for minutes after launch on Macs with a long Codex history.
 - Dynamic Island accessory alerts no longer show a connection notice when a phone, tablet or computer connects to the Mac over Bluetooth.
 - Dynamic Island's Tools page no longer scrolls by itself while the pointer rests on a tool away from the center, so tools stay put and are easy to click.
 - Dynamic Island's Fan Control page is as tall as its card, instead of opening a tall, mostly empty page even with the Compact size.
@@ -127,7 +127,7 @@ This beta takes Dynamic Island beyond the notch. It floats as a capsule on displ
 - Holding or dragging an icon in the Dock no longer opens the Shelf, in Dynamic Island or in the menu bar drop zone.
 - Text fields in Dynamic Island, the menu bar panel and Quick Launcher yield Esc to input method composition, so it cancels the text being composed in Chinese, Japanese and Korean instead of closing the island, the panel or the open utility, or discarding a Volume Mixer percentage being typed.
 - The menu bar panel opens centered under its icon again, without a gray band along its top and right edges on macOS 14 and 15, and tall tabs no longer open it beside the icon.
-- Opening or using Siri AI on macOS 27 no longer opens Vorssaint's Settings or menu bar panel.
+- Opening or using Siri AI on macOS 27 no longer opens Rukn's Settings or menu bar panel.
 - Closing the menu bar panel returns focus to the previous app without switching desktops.
 - Esc in Settings no longer closes the menu bar panel open beside it, so it clears a search or closes a sheet there. A confirmation or popover opened from the panel now closes before the panel does.
 - The menu bar panel shows the Controls tab when Focus follows mouse is the only installed control, so its switch is no longer out of reach.
@@ -135,7 +135,7 @@ This beta takes Dynamic Island beyond the notch. It floats as a capsule on displ
 - Expanding a weekly Automatic cleanup in the Cleaner no longer cuts off the edges of the menu bar panel or Quick Launcher. The weekday moves to its own row when it does not fit beside the time.
 - Scrolling the Features page in Settings no longer stutters or freezes the app.
 - The Features page shows that App Switcher and Super key also listen to the mouse, and that the music app blocker listens to the keyboard, as does Brightness when its key options are on.
-- App Switcher no longer lags while stepping through apps with Tab, and activating an app no longer stalls Vorssaint while its window previews warm up.
+- App Switcher no longer lags while stepping through apps with Tab, and activating an app no longer stalls Rukn while its window previews warm up.
 - Dock Preview, App Switcher and Command Bar list every window of an app that was hidden and shown again, not only its front window.
 - Dock Preview's Panel background slider, which has no effect on Liquid Glass, is turned off while Liquid Glass is on and points to System Settings → Appearance instead.
 - Window Layout edge snapping remains available when displays share Spaces and macOS tiling controls are unavailable.
@@ -250,7 +250,7 @@ Settings is easier to navigate and highlights linked sections together. New Dyna
 ### Fixed
 - Dynamic Island play/pause works with the active video player even when its media session has no item identifier.
 - Homebrew search results offer a direct install button in Dynamic Island and the menu panel, and reflect the installed state after a package changes.
-- Clipboard History keeps recording after the macOS pasteboard service restarts, instead of silently stopping until Vorssaint is relaunched.
+- Clipboard History keeps recording after the macOS pasteboard service restarts, instead of silently stopping until Rukn is relaunched.
 
 ### Contributors
 Thanks to @npcmail010 and @zorahrel.
@@ -285,7 +285,7 @@ Dynamic Island gains optional calendar and music indicators, room for a timer be
 - Dynamic Island keeps its glass dark during transitions, its playback controls steady while checking access, and its search and settings controls usable in narrow windows. Lyrics now match Apple Music singles and EPs.
 - Dynamic Island keeps Open available for notifications from closed apps. Clipboard search selects results with the arrow keys and activates one with Return; Reduce Motion no longer flashes page content during opening.
 - Brightness keys from external keyboards reach Dynamic Island and the overlay. When the island is hidden, turning off its brightness indicator leaves the system indicator in charge.
-- Extra Brightness stays active while Vorssaint's own controls are in use and comes down before an update's administrator prompt. External-monitor brightness keys keep a level just set with a slider.
+- Extra Brightness stays active while Rukn's own controls are in use and comes down before an update's administrator prompt. External-monitor brightness keys keep a level just set with a slider.
 - Clipboard History loads image previews in the background, keeps pinned entries within its storage limit, and reports when a quick paste cannot reach its target. Command Bar reports failed copies and changes brightness on the display under the pointer.
 - App Switcher preserves focus order and avoids a second focus attempt after a window is already in front. It and Dock Preview no longer hit controls at the top-left of a window they activate; minimal Dock previews no longer leave empty bands.
 - Panels, captures and window drops follow the pointer's display even at its top edge. Floating panels stay out of tiling window managers.
@@ -708,7 +708,7 @@ The selected changes below cover new options and fixes that affect everyday use.
 ## [3.3.3-beta.4] - 2026-09-03
 
 ### Summary
-Vorssaint adds protections for Command Q and Command W, a pause on lock option for Keep Awake, pointer and stray click controls for mice, blur in the recording editor, sharing from the Shelf, and new options across capture, clipboard, Super key, App Switcher, Dock Preview and Window Layout. It also makes the Command Bar, App Switcher, Dock Preview, radial menu and cleaning faster, widens app update and leftover discovery, and fixes input, window switching, clipboard, capture, app installation and audio behavior throughout.
+Rukn adds protections for Command Q and Command W, a pause on lock option for Keep Awake, pointer and stray click controls for mice, blur in the recording editor, sharing from the Shelf, and new options across capture, clipboard, Super key, App Switcher, Dock Preview and Window Layout. It also makes the Command Bar, App Switcher, Dock Preview, radial menu and cleaning faster, widens app update and leftover discovery, and fixes input, window switching, clipboard, capture, app installation and audio behavior throughout.
 
 ### Added
 - Optional protections for Command Q and Command W, with a hold, a double press or an extra modifier, per app and following your keyboard layout. Thanks to @RuanMD and @PathGao.
@@ -733,7 +733,7 @@ Vorssaint adds protections for Command Q and Command W, a pause on lock option f
 - Cleaning Mode can keep the screen visible with a discreet corner indicator instead of blacking it out.
 - Eject all disks can leave chosen drives mounted, so backup and permanent storage stay connected. Thanks to @PathGao.
 - The disk image installer shows progress while it copies and verifies an app, then offers to trash the download and reveal the app, remembering both answers.
-- The Command Bar can restart Vorssaint. Thanks to @CSkjolden.
+- The Command Bar can restart Rukn. Thanks to @CSkjolden.
 - Radial menu settings include an interactive wheel preview that lets you drag to swap actions, click to configure, and navigate submenus.
 
 ### Changed
@@ -890,7 +890,7 @@ Vorssaint adds protections for Command Q and Command W, a pause on lock option f
 
 ### Added
 - The app icon has been redesigned and now supports adaptive system appearance modes for light, dark, tinted, or clear icon styles on macOS 26 and later, while macOS 14 and 15 keep the classic icon. Thanks to @divisionseven.
-- A new Bluetooth on sleep feature switches Bluetooth off while the Mac sleeps, so a closed laptop stops connecting to headphones it should leave alone. Bluetooth that was already off before sleep stays off, and only what Vorssaint switched off is put back on wake. Thanks to @marcfusch.
+- A new Bluetooth on sleep feature switches Bluetooth off while the Mac sleeps, so a closed laptop stops connecting to headphones it should leave alone. Bluetooth that was already off before sleep stays off, and only what Rukn switched off is put back on wake. Thanks to @marcfusch.
 - App Switcher now lets you place minimized windows at the end of the list or hide them, and toggle fullscreen window visibility. Thanks to @itsofirk.
 - The radial menu now includes a Now Playing media action with a floating track card and direct app access. Thanks to @ruvelro.
 - The radial menu editor now includes a broader built-in SF Symbol catalog with runtime availability filtering. Thanks to @ruvelro.
@@ -923,7 +923,7 @@ Vorssaint adds protections for Command Q and Command W, a pause on lock option f
 ## [3.3.3-beta.1] - 2026-08-22
 
 ### Summary
-Vorssaint 3.3.3-beta.1 introduces the opt-in beta release channel and in-app feedback diagnostics alongside full manual and temperature-based Fan Control, directional pointer window layout, an opt-in Kill Process tool and native input-source switching for the Super key and drag-to-place Dock previews. It keeps grouped and windowless App Switcher labels clear, splits App Switcher rows evenly when they wrap, makes Scratchpad controls easier to click, keeps fixed page footers from repeating in scrolling screenshots, restores reliable trimming from the start of a recording, makes administrator approval for updates originate from Vorssaint, keeps messaging app cleanup in Cleaner hidden until you turn it on, keeps Separate metrics in Settings instead of the menu bar panel, lets you open Music yourself while the media-key blocker is on, and shows compressed memory and cached files in the System panel.
+Rukn 3.3.3-beta.1 introduces the opt-in beta release channel and in-app feedback diagnostics alongside full manual and temperature-based Fan Control, directional pointer window layout, an opt-in Kill Process tool and native input-source switching for the Super key and drag-to-place Dock previews. It keeps grouped and windowless App Switcher labels clear, splits App Switcher rows evenly when they wrap, makes Scratchpad controls easier to click, keeps fixed page footers from repeating in scrolling screenshots, restores reliable trimming from the start of a recording, makes administrator approval for updates originate from Rukn, keeps messaging app cleanup in Cleaner hidden until you turn it on, keeps Separate metrics in Settings instead of the menu bar panel, lets you open Music yourself while the media-key blocker is on, and shows compressed memory and cached files in the System panel.
 
 ### Added
 - Window Layout now offers an opt-in Shortcut + pointer layout mode that places the active window toward
@@ -1027,7 +1027,7 @@ Vorssaint 3.3.3-beta.1 introduces the opt-in beta release channel and in-app fee
   records are now stored so only your own account can read them. Folders an earlier
   version left readable by other accounts on the Mac are corrected on the next
   write. Thanks to @ThomasWaldmann.
-- Administrator approval for updates now originates from Vorssaint instead of a
+- Administrator approval for updates now originates from Rukn instead of a
   system script. Thanks to @dbhorst.
 - Switching a display back on from Displays no longer freezes the app. The
   change is now made on the main thread, where macOS expects it, instead of on
@@ -1045,7 +1045,7 @@ Vorssaint 3.3.3-beta.1 introduces the opt-in beta release channel and in-app fee
 ## [3.3.2] - 2026-08-20
 
 ### Summary
-Vorssaint 3.3.2 brings one place for screen capture, batch image conversion,
+Rukn 3.3.2 brings one place for screen capture, batch image conversion,
 local Command Bar scripts, recent captures, imported video editing, formatted
 Scratchpad previews, swap use and window focus that follows the pointer. It also
 opens a new Discord community, cuts background energy use and improves
@@ -1148,7 +1148,7 @@ Fan Control, Settings and app maintenance.
 ## [3.3.1] - 2026-08-09
 
 ### Summary
-Vorssaint 3.3.1 adds editable recording audio, temporary recording links, one-click app installs,
+Rukn 3.3.1 adds editable recording audio, temporary recording links, one-click app installs,
 Fan Control and more configurable window tools. It also improves Settings backups, Keep Awake,
 input controls, the menu bar, Switcher, displays, app management, capture, the file shelf and cleaning.
 
@@ -1167,7 +1167,7 @@ input controls, the menu bar, Switcher, displays, app management, capture, the f
   or hide them from the Switcher. Under Switcher. Thanks to @Yahddyyp.
 - Dock clicks can hide the active app instead of minimizing its windows, off by
   default under Switcher. Thanks to @sidbena.
-- Screenshots can include ordinary Vorssaint windows, and recordings can select them
+- Screenshots can include ordinary Rukn windows, and recordings can select them
   like other windows, while capture controls stay out. Off by default under Screenshot.
   Thanks to @PathGao.
 
@@ -1257,7 +1257,7 @@ input controls, the menu bar, Switcher, displays, app management, capture, the f
 - The menu bar panel no longer leaves a focus outline on a different section than
   the one being shown.
 - The menu bar panel now opens on the first visible section in your chosen order
-  after Vorssaint starts.
+  after Rukn starts.
 - The System panel no longer shows battery readings on Macs without a battery.
 - The package manager page and Settings sidebar now keep their tops visible and
   scroll normally.
@@ -1280,7 +1280,7 @@ input controls, the menu bar, Switcher, displays, app management, capture, the f
 ## [3.3.0] - 2026-08-04
 
 ### Summary
-Vorssaint 3.3.0 records the screen, captures and shares screenshots, and improves
+Rukn 3.3.0 records the screen, captures and shares screenshots, and improves
 annotation order. Finder and Window Layout gain new tools and refinements, while
 setup and the Command Bar make features, feedback and saved searches easier to use.
 
@@ -1348,7 +1348,7 @@ setup and the Command Bar make features, feedback and saved searches easier to u
   when a sensor briefly reports bad data. Thanks to @georgo.
 - The App Switcher no longer adds a blank duplicate for a window on another
   desktop. Thanks to @CSkjolden.
-- App Updates no longer lists Vorssaint itself or versions that need a newer
+- App Updates no longer lists Rukn itself or versions that need a newer
   macOS. Thanks to @AB-boi.
 - A disabled feature no longer blocks its saved shortcut from being used
   elsewhere. Thanks to @AB-boi.
@@ -1380,7 +1380,7 @@ setup and the Command Bar make features, feedback and saved searches easier to u
 ## [3.2.0] - 2026-07-31
 
 ### Summary
-Vorssaint 3.2.0 adds the Command Bar, one field that finds and runs anything on
+Rukn 3.2.0 adds the Command Bar, one field that finds and runs anything on
 your Mac, plus app updates in one list, a searchable snippet menu, a super key
 on Caps Lock and mouse button shortcuts.
 
@@ -1500,7 +1500,7 @@ on Caps Lock and mouse button shortcuts.
 ## [3.1.15] - 2026-07-21
 
 ### Summary
-Vorssaint 3.1.15 fixes starts that could leave the app with no menu bar icon
+Rukn 3.1.15 fixes starts that could leave the app with no menu bar icon
 or quit it right away, freezes where the app stopped responding, a crash
 while choosing a screenshot area, and an external display that could go dark
 and stay dark. It also gives back the clicks that moving windows by dragging
@@ -1554,7 +1554,7 @@ press.
 ## [3.1.14] - 2026-07-18
 
 ### Summary
-Vorssaint 3.1.14 adds a radial menu that puts your favorite actions on a
+Rukn 3.1.14 adds a radial menu that puts your favorite actions on a
 wheel around the pointer, Camera preview, a floating mirror for video
 calls, and a scratchpad that keeps quick notes in a floating window and
 saves as you type. A short tour presents the highlights once after the
@@ -1606,7 +1606,7 @@ keys on external monitors, Launch at Login, the Volume Mixer and more.
 - Brightness keys now really follow the pointer on external monitors that
   macOS drives natively, including with the lid closed. Presses used to
   land only on the built-in display.
-- Vorssaint no longer crashes right after launch when macOS returns no power
+- Rukn no longer crashes right after launch when macOS returns no power
   source data for the battery readings.
 - Closed lid mode no longer asks for the administrator password on every
   toggle. The one-time setup is now verified for real and repaired with a
@@ -1638,7 +1638,7 @@ keys on external monitors, Launch at Login, the Volume Mixer and more.
 ## [3.1.13] - 2026-07-15
 
 ### Summary
-Vorssaint 3.1.13 adds a screenshot tool with a quick preview and optional
+Rukn 3.1.13 adds a screenshot tool with a quick preview and optional
 editor, brightness and power controls for
 all your displays, a Quick toggles tab, automatic Keep Awake rules and compact
 usage bars in the menu bar. It also keeps Extra Brightness steady around
@@ -1660,7 +1660,7 @@ fullscreen video and returns Finder to the Volume Mixer.
   Settings.
 - Keep Awake can start with an external display or while connected to power.
   Combine both conditions in Options or Energy settings.
-- Keep Awake can use the Vorssaint, coffee, eye, moon or lightbulb icon while
+- Keep Awake can use the Rukn, coffee, eye, moon or lightbulb icon while
   active. Choose the icon and its color in Options or Energy settings.
 - Window Layout moves and resizes windows from any point with a trackpad or
   mouse. Drag with chosen modifiers to move, add Shift to resize, or use the
@@ -1696,11 +1696,11 @@ fullscreen video and returns Finder to the Volume Mixer.
 ## [3.1.12] - 2026-07-11
 
 ### Highlight
-Vorssaint is massively optimized, with up to 95 percent less CPU and
+Rukn is massively optimized, with up to 95 percent less CPU and
 energy use than 3.1.11. Cooler, quieter and easier on your battery.
 
 ### Summary
-Vorssaint 3.1.12 adds a Features hub with one click bundles and honest
+Rukn 3.1.12 adds a Features hub with one click bundles and honest
 energy badges, an onboarding that sets the app up from one answer, a
 floating permission guide, text snippets, settings backup and a cleaner
 that reaches the storage macOS calls Other. It is also far lighter on
@@ -1757,7 +1757,7 @@ Dock clicks on Java apps.
 ## [3.1.11] - 2026-07-10
 
 ### Summary
-Vorssaint 3.1.11 adds Cleaner, a simpler switcher, more useful Shelf
+Rukn 3.1.11 adds Cleaner, a simpler switcher, more useful Shelf
 controls, sixth screen layouts and mouse side button navigation. It also
 keeps extra brightness steady, blocks unwanted Music launches and lets
 paste as plain text use Command V.
@@ -1791,7 +1791,7 @@ paste as plain text use Command V.
 ## [3.1.10] - 2026-07-09
 
 ### Summary
-Vorssaint 3.1.10 fixes extra brightness, which showed as unavailable on
+Rukn 3.1.10 fixes extra brightness, which showed as unavailable on
 the MacBook Pro models it was made for.
 
 ### Fixed
@@ -1801,7 +1801,7 @@ the MacBook Pro models it was made for.
 ## [3.1.9] - 2026-07-08
 
 ### Summary
-Vorssaint 3.1.9 gives the shelf a home under the menu bar icon, adds
+Rukn 3.1.9 gives the shelf a home under the menu bar icon, adds
 smooth mouse scrolling and extra brightness for XDR displays, and makes
 the Settings window resizable. It also fixes typing freezes while a
 password prompt is open.
@@ -1844,7 +1844,7 @@ password prompt is open.
 ## [3.1.8] - 2026-07-07
 
 ### Summary
-Vorssaint 3.1.8 polishes the whole app. The Settings window gains a search
+Rukn 3.1.8 polishes the whole app. The Settings window gains a search
 field and clearer groups, the menu bar metrics learn a compact spacing and
 can stand alone without the app icon, and the image converter now produces
 PDFs. Community requests came along: an optional mute indicator beside the
@@ -1916,7 +1916,7 @@ the Volume Mixer page on Macs with busy audio activity.
   simply never registered.
 - Monitor alerts can now fire as often as every 2 minutes, following user
   feedback that 5 minutes was too long to wait for a memory pressure
-  warning. And when notifications for Vorssaint are turned off in System
+  warning. And when notifications for Rukn are turned off in System
   Settings, the alerts section now says so, instead of leaving enabled
   alerts silently dead.
 - A new Keyboard shortcuts page in Settings lists every global shortcut
@@ -2071,7 +2071,7 @@ the Volume Mixer page on Macs with busy audio activity.
 ## [3.1.7] - 2026-07-04
 
 ### Summary
-Vorssaint 3.1.7 adds the quick panel, a floating hub that opens anywhere with
+Rukn 3.1.7 adds the quick panel, a floating hub that opens anywhere with
 one shortcut and holds your favorite tools, lets a click on the Dock icon
 minimize an app's windows, adds a real middle click for the trackpad, saves
 copied images and files in Clipboard History, and adds four new tools: copy
@@ -2123,7 +2123,7 @@ recovery and App Switcher previews.
   app, thanks to Jensen.
 
 ### Changed
-- Vorssaint now updates on a weekly rhythm so every feature arrives better
+- Rukn now updates on a weekly rhythm so every feature arrives better
   tested and more polished; critical fixes still ship right away. The short
   note shown after updating explains it and links to where previews of
   upcoming features are posted.
@@ -2154,7 +2154,7 @@ recovery and App Switcher previews.
 ## [3.1.6] - 2026-06-30
 
 ### Summary
-Vorssaint 3.1.6 adds Turkish, makes Clipboard History quicker to use from the quick window, lets Mixer choose how low speaker volume goes after headphones disconnect, adds faster App Switcher back navigation, adds a Network menu bar order option, steadies the Network menu bar metric, cleans up the in app update preview and corrects the menu bar monitor layout so pinned metrics sit centered beside the app icon.
+Rukn 3.1.6 adds Turkish, makes Clipboard History quicker to use from the quick window, lets Mixer choose how low speaker volume goes after headphones disconnect, adds faster App Switcher back navigation, adds a Network menu bar order option, steadies the Network menu bar metric, cleans up the in app update preview and corrects the menu bar monitor layout so pinned metrics sit centered beside the app icon.
 
 ### Added
 - Turkish is now available throughout the app, thanks to Abdurrahman.
@@ -2177,7 +2177,7 @@ Vorssaint 3.1.6 adds Turkish, makes Clipboard History quicker to use from the qu
 ## [3.1.5] - 2026-06-29
 
 ### Summary
-Vorssaint 3.1.5 adds multi-item paste to Clipboard History, makes Quit on close exceptions easier to set up from installed apps, adds per-app network activity and optional peripheral battery status to Monitor, adds keyboard debounce for duplicate key presses, improves Mixer compatibility with Zoom calls, improves localized feature labels, and improves App Switcher order and shortcuts.
+Rukn 3.1.5 adds multi-item paste to Clipboard History, makes Quit on close exceptions easier to set up from installed apps, adds per-app network activity and optional peripheral battery status to Monitor, adds keyboard debounce for duplicate key presses, improves Mixer compatibility with Zoom calls, improves localized feature labels, and improves App Switcher order and shortcuts.
 
 ### Added
 - Clipboard History can now mark multiple items in the quick window and paste or
@@ -2217,7 +2217,7 @@ Vorssaint 3.1.5 adds multi-item paste to Clipboard History, makes Quit on close 
 ## [3.1.4] - 2026-06-27
 
 ### Summary
-Vorssaint 3.1.4 makes Homebrew in Settings more stable and easier to browse, adds package updates from Homebrew, adds a large-icon ⌘Tab view with visible shortcuts, adds finer Window Layout placement options, improves App Switcher and Dock Preview navigation, expands Monitor menu bar metrics and makes Clipboard History faster to use from the keyboard.
+Rukn 3.1.4 makes Homebrew in Settings more stable and easier to browse, adds package updates from Homebrew, adds a large-icon ⌘Tab view with visible shortcuts, adds finer Window Layout placement options, improves App Switcher and Dock Preview navigation, expands Monitor menu bar metrics and makes Clipboard History faster to use from the keyboard.
 
 ### Added
 - Window Layout can now place the active window into left, center and right
@@ -2263,7 +2263,7 @@ Vorssaint 3.1.4 makes Homebrew in Settings more stable and easier to browse, add
 ## [3.1.3] - 2026-06-25
 
 ### Summary
-Vorssaint 3.1.3 makes Cleaning Mode, Keep Awake, Monitor, Clipboard History and the Window Switcher more reliable, improves readability in the panel and adds optional pointer movement for Keep Awake sessions.
+Rukn 3.1.3 makes Cleaning Mode, Keep Awake, Monitor, Clipboard History and the Window Switcher more reliable, improves readability in the panel and adds optional pointer movement for Keep Awake sessions.
 
 ### Added
 - Keep Awake can now move the pointer slightly at a chosen interval during
@@ -2290,13 +2290,13 @@ Vorssaint 3.1.3 makes Cleaning Mode, Keep Awake, Monitor, Clipboard History and 
 ## [3.1.2] - 2026-06-24
 
 ### Summary
-Vorssaint 3.1.2 improves GIF handling in Media and Shelf, adds more Keep Awake control in the panel, lets Monitor metrics use separate menu bar items with focused detail views and expands the Volume Mixer with speaker protection and shortcut-based output switching.
+Rukn 3.1.2 improves GIF handling in Media and Shelf, adds more Keep Awake control in the panel, lets Monitor metrics use separate menu bar items with focused detail views and expands the Volume Mixer with speaker protection and shortcut-based output switching.
 
 ### Added
 - Keep Awake can now choose the active menu bar icon color directly from the
   panel, including an option to keep the normal adaptive icon with no active
   color.
-- Keep Awake can now start automatically when Vorssaint opens, if enabled from
+- Keep Awake can now start automatically when Rukn opens, if enabled from
   the panel or Energy settings.
 - Monitor metrics can now use separate menu bar items, so each active metric can
   be positioned independently on crowded or notched menu bars. Clicking a metric
@@ -2325,14 +2325,14 @@ Vorssaint 3.1.2 improves GIF handling in Media and Shelf, adds more Keep Awake c
 ## [3.1.1] - 2026-06-23
 
 ### Summary
-Vorssaint 3.1.1 makes Homebrew package loading more reliable, keeps Clipboard History from disrupting the app you are pasting into and adds direct window closing in App Switcher.
+Rukn 3.1.1 makes Homebrew package loading more reliable, keeps Clipboard History from disrupting the app you are pasting into and adds direct window closing in App Switcher.
 
 ### Added
 - App Switcher cards now show a close button on hover, so you can close a
   specific window without leaving the switcher.
 
 ### Fixed
-- Clipboard History no longer activates Vorssaint when opening the quick history
+- Clipboard History no longer activates Rukn when opening the quick history
   window, so paste actions keep their target in apps like Excel.
 - Closing a window from Dock Preview or App Switcher now triggers Quit on Close
   when that was the app's last window.
@@ -2342,7 +2342,7 @@ Vorssaint 3.1.1 makes Homebrew package loading more reliable, keeps Clipboard Hi
 ## [3.1.0] - 2026-06-23
 
 ### Summary
-Vorssaint 3.1.0 adds three optional tools: Clipboard History for saving and reusing copied text locally, Window Layout for arranging the active window with shortcuts, and Monitor Alerts for notifying you when selected system limits need attention. It also makes Settings easier to browse and improves menu bar metric readability on light and dark wallpapers.
+Rukn 3.1.0 adds three optional tools: Clipboard History for saving and reusing copied text locally, Window Layout for arranging the active window with shortcuts, and Monitor Alerts for notifying you when selected system limits need attention. It also makes Settings easier to browse and improves menu bar metric readability on light and dark wallpapers.
 
 ### Added
 - Clipboard History, with local text history, pinned items, search, manual order,
@@ -2392,7 +2392,7 @@ Vorssaint 3.1.0 adds three optional tools: Clipboard History for saving and reus
 ## [3.0.9] - 2026-06-20
 
 ### Summary
-- This update focuses on making Vorssaint feel lighter, steadier and more
+- This update focuses on making Rukn feel lighter, steadier and more
   reliable during everyday use.
 - Menu bar readings for CPU, GPU, RAM and temperatures stay visible through
   brief refresh gaps, while the monitor does less background work when the panel
@@ -2430,7 +2430,7 @@ Vorssaint 3.1.0 adds three optional tools: Clipboard History for saving and reus
   default, with a setting to split them into separate CPU°C, GPU°C and BAT°C
   blocks.
 
-![Menu bar temperature metrics](https://raw.githubusercontent.com/vorssaint/vorssaint-utils/main/Resources/Images/menu-bar-temperature-metrics.png)
+![Menu bar temperature metrics](https://raw.githubusercontent.com/rukn/rukn-utils/main/Resources/Images/menu-bar-temperature-metrics.png)
 
 ## [3.0.7] - 2026-06-20
 
@@ -2458,7 +2458,7 @@ Vorssaint 3.1.0 adds three optional tools: Clipboard History for saving and reus
   turned off.
 
 ### Fixed
-- Closed Vorssaint Settings windows no longer linger in App Switcher.
+- Closed Rukn Settings windows no longer linger in App Switcher.
 - Minimized windows now stay open and remain available in App Switcher and Dock
   Preview.
 
@@ -2583,7 +2583,7 @@ Vorssaint 3.1.0 adds three optional tools: Clipboard History for saving and reus
   read.
 
 ### Fixed
-- The Uninstaller app chooser now stays inside Vorssaint instead of opening the
+- The Uninstaller app chooser now stays inside Rukn instead of opening the
   system file picker, avoiding unexpected language changes.
 
 ## [2.17.3] - 2026-06-17
@@ -2745,14 +2745,14 @@ Vorssaint 3.1.0 adds three optional tools: Clipboard History for saving and reus
 
 ### Added
 - **Support the project.** A new Support tab in Settings, and a brief one-time note
-  when you update, let you back Vorssaint with a coffee if you'd like. It stays
+  when you update, let you back Rukn with a coffee if you'd like. It stays
   free, with no subscription, always.
 
 ### Fixed
 - **Battery health matches macOS.** The health percentage now lines up with the
   "Maximum Capacity" shown in System Information.
 - **The menu bar icon is recoverable.** macOS can hide menu bar icons when the bar
-  runs out of room, common on Macs with a notch. Now reopening Vorssaint from
+  runs out of room, common on Macs with a notch. Now reopening Rukn from
   Applications brings the icon back, a new "Show menu bar icon" button in Settings
   rebuilds it, and the icon remembers its position.
 - Fixed the Support tab hiding the rest of the Settings sidebar.
@@ -2860,18 +2860,18 @@ Vorssaint 3.1.0 adds three optional tools: Clipboard History for saving and reus
 
 ### Added
 - **Advanced settings page** with two clean-up tools, each behind a confirmation:
-  - **Clear all permissions** resets every permission you granted Vorssaint
+  - **Clear all permissions** resets every permission you granted Rukn
     (Accessibility, Screen Recording, Full Disk Access and the rest) and removes
     its login item and closed-lid rule, leaving the app in place. Good for a fresh
     start or before uninstalling.
-  - **Uninstall Vorssaint completely** does all of that, removes the preferences,
+  - **Uninstall Rukn completely** does all of that, removes the preferences,
     moves the app to the Trash and quits, leaving nothing behind. You can
     reinstall anytime.
 
 ## [2.6.0] - 2026-06-14
 
 ### Changed
-- **Vorssaint is now signed with an Apple Developer ID and notarized.** The
+- **Rukn is now signed with an Apple Developer ID and notarized.** The
   first-launch security warning is gone: downloads open normally, with nothing to
   click around. Releases are notarized and stapled automatically.
 
@@ -2920,7 +2920,7 @@ Vorssaint 3.1.0 adds three optional tools: Clipboard History for saving and reus
   Trash on first launch.** The startup cleanup compared bundle locations too
   strictly and mistook the just-updated app (still at the old path, because the
   previous updater installs in place) for a leftover copy. It now renames that
-  bundle to `Vorssaint.app` through a helper that runs only after the app quits,
+  bundle to `Rukn.app` through a helper that runs only after the app quits,
   always reopening the app, and the leftover cleanup only runs for a bundle that
   is provably not the one running. Recover a trashed copy by reinstalling from
   the DMG: the bundle id is unchanged, so permissions and settings return intact
@@ -2928,19 +2928,19 @@ Vorssaint 3.1.0 adds three optional tools: Clipboard History for saving and reus
 ## [2.5.0] - 2026-06-13
 
 ### Changed
-- **The app is now "Vorssaint" everywhere the system shows it.** The app file is
-  renamed to `Vorssaint.app` and its executable to `Vorssaint`, so Spotlight, the
+- **The app is now "Rukn" everywhere the system shows it.** The app file is
+  renamed to `Rukn.app` and its executable to `Rukn`, so Spotlight, the
   Applications list, Login Items, notifications, the permission panes and system
-  dialogs all read "Vorssaint", with no trace of the old name
+  dialogs all read "Rukn", with no trace of the old name
 - Internal names follow suit (the audio mixer device, the closed-lid rule file,
-  the diagnostics binary) and the source tree moved to `Sources/Vorssaint`
+  the diagnostics binary) and the source tree moved to `Sources/Rukn`
 
 ### Migration
 - **Updating keeps your permissions, settings and data, with nothing to do.** The
   bundle identifier is unchanged, so every granted permission (Accessibility,
   Screen Recording, Full Disk Access, Automation), your preferences and the login
-  item carry over untouched. The update installs `Vorssaint.app` and removes the
-  old `Vorssaint Utils.app`; if a copy is ever left behind (for example after a
+  item carry over untouched. The update installs `Rukn.app` and removes the
+  old `Rukn.app`; if a copy is ever left behind (for example after a
   manual install), the app moves it to the Trash on its next launch. The
   closed-lid rule file is renamed the next time that toggle is used
 
@@ -2960,7 +2960,7 @@ Vorssaint 3.1.0 adds three optional tools: Clipboard History for saving and reus
 ## [2.4.6] - 2026-06-12
 
 ### Changed
-- The app is now called simply **Vorssaint** everywhere you see it (menu bar,
+- The app is now called simply **Rukn** everywhere you see it (menu bar,
   About, onboarding, notifications). The bundle id, signing identity and app
   filename are unchanged, so this update keeps your granted permissions
 - README rewritten around what each feature gets you, with the free, local,
@@ -3125,7 +3125,7 @@ Stability pass over the whole project: same behavior, fewer ways to fail.
 
 ## [2.0.0] - 2026-06-12
 
-The app was renamed from **Vorss** to **Vorssaint Utils** and prepared for
+The app was renamed from **Vorss** to **Rukn** and prepared for
 open source distribution.
 
 ### Added
@@ -3146,7 +3146,7 @@ open source distribution.
 - CI build workflow and automated DMG releases
 
 ### Changed
-- Renamed to **Vorssaint Utils** (`com.vorssaint.utils`); legacy `Vorss.app`
+- Renamed to **Rukn** (`com.hussainiholding.rukn`); legacy `Vorss.app`
   is removed by `./build.sh --install`
 - The System section now shows only temperatures, usage and memory pressure
 - Settings reorganized into General / Energy / Mouse / Switcher / About

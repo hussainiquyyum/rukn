@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 // Copyright (C) 2026 Vorssaint
+// Copyright (C) 2026 Hussaini Holding
 
 import AppKit
 import Carbon.HIToolbox
@@ -25,7 +26,7 @@ enum ScratchpadStoreContractTests {
 
         func fixture(_ check: (URL, UserDefaults, inout ScratchpadStore) throws -> Void) {
             let directory = manager.temporaryDirectory.appendingPathComponent(UUID().uuidString)
-            let suiteName = "com.vorssaint.tests.scratchpad.\(UUID().uuidString)"
+            let suiteName = "com.hussainiholding.rukn.tests.scratchpad.\(UUID().uuidString)"
             let defaults = UserDefaults(suiteName: suiteName)!
             defer {
                 try? manager.removeItem(at: directory)

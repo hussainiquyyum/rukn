@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 // Copyright (C) 2026 Vorssaint
+// Copyright (C) 2026 Hussaini Holding
 
 import Foundation
 
@@ -8,7 +9,7 @@ enum NotchFileToolsTests {
         NotchDownloadFolderChoiceTests.run(suite)
         MediaDialogHostTests.run { suite.expect($0, $1) }
         ShelfDragCompletionTests.run(suite)
-        let domain = "com.vorssaint.tests.notch-files"
+        let domain = "com.hussainiholding.rukn.tests.notch-files"
         let defaults = UserDefaults(suiteName: domain)!
         defaults.removePersistentDomain(forName: domain)
         defer { defaults.removePersistentDomain(forName: domain) }
