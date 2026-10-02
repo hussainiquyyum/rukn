@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 // Copyright (C) 2026 Vorssaint
+// Copyright (C) 2026 Hussaini Holding
 
 import Foundation
 import ImageIO
@@ -8,9 +9,9 @@ import ObjectiveC
 /// The queue stays inside the existing isolated adapter. No request, timer or
 /// retained player object survives closing the queue surface.
 enum NotchNativeQueue {
-    private static let work = DispatchQueue(label: "com.vorssaint.now-playing-queue")
-    private static let callbacks = DispatchQueue(label: "com.vorssaint.now-playing-queue-callbacks")
-    private static let covers = DispatchQueue(label: "com.vorssaint.now-playing-queue-covers")
+    private static let work = DispatchQueue(label: "com.hussainiholding.rukn.now-playing-queue")
+    private static let callbacks = DispatchQueue(label: "com.hussainiholding.rukn.now-playing-queue-callbacks")
+    private static let covers = DispatchQueue(label: "com.hussainiholding.rukn.now-playing-queue-covers")
     private static let coverPixels = 96
     private static let maximumCoverBytes = 64 * 1_024
     private static var coverToken: UUID?

@@ -1,8 +1,9 @@
 #!/bin/zsh
 # SPDX-License-Identifier: GPL-3.0-or-later
 # Copyright (C) 2026 Vorssaint
+# Copyright (C) 2026 Hussaini Holding
 
-# Builds Vorssaint, assembles the .app bundle, signs it and (with --install)
+# Builds Rukn, assembles the .app bundle, signs it and (with --install)
 # installs it into /Applications.
 #
 # The bundle is staged in a temporary directory outside ~/Documents: folders synced
@@ -26,7 +27,7 @@ trap cleanup EXIT
 # into the build sweeps like any other ending.
 trap 'exit 1' INT TERM HUP
 
-# Flags: --dev builds the local-only "Vorssaint (Developer)" variant (its own
+# Flags: --dev builds the local-only "Rukn (Developer)" variant (its own
 # bundle id, so it coexists with the official app); --install puts it in /Applications.
 DEV=0
 INSTALL=0
@@ -43,16 +44,16 @@ for arg in "$@"; do
 done
 
 if (( DEV )); then
-    APP_NAME="Vorssaint (Developer)"
-    EXECUTABLE="VorssaintDeveloper"
-    APP_BUNDLE_ID="com.vorssaint.utils.dev"
-    BUILD_VARIANT_FLAGS=(-D VORSSAINT_DEVELOPMENT)
+    APP_NAME="Rukn (Developer)"
+    EXECUTABLE="RuknDeveloper"
+    APP_BUNDLE_ID="com.hussainiholding.rukn.dev"
+    BUILD_VARIANT_FLAGS=(-D RUKN_DEVELOPMENT)
     APP_OPTIMIZATION_FLAGS=(-Onone)
     BUILD_CONFIGURATION="debug"
 else
-    APP_NAME="Vorssaint"
-    EXECUTABLE="Vorssaint"
-    APP_BUNDLE_ID="com.vorssaint.utils"
+    APP_NAME="Rukn"
+    EXECUTABLE="Rukn"
+    APP_BUNDLE_ID="com.hussainiholding.rukn"
     BUILD_VARIANT_FLAGS=()
     APP_OPTIMIZATION_FLAGS=(-O)
     BUILD_CONFIGURATION="release"
@@ -61,10 +62,10 @@ FAN_HELPER_ID="$APP_BUNDLE_ID.fan-control"
 # Now Playing is read through /usr/bin/perl loading this library; see
 # Sources/NowPlayingAdapter. Staged under Contents/Frameworks, signed on its own.
 NOW_PLAYING_ADAPTER_ID="$APP_BUNDLE_ID.now-playing"
-NOW_PLAYING_ADAPTER="libVorssaintNowPlaying.dylib"
+NOW_PLAYING_ADAPTER="libRuknNowPlaying.dylib"
 TARGET="arm64-apple-macosx14.0"
-ENTITLEMENTS="Resources/Vorssaint.entitlements"
-LEGACY_IDENTITY="Vorssaint Utils Signing"
+ENTITLEMENTS="Resources/Rukn.entitlements"
+LEGACY_IDENTITY="Rukn Signing"
 
 developer_id_identity() {
     security find-identity -v -p codesigning 2>/dev/null \
@@ -80,8 +81,8 @@ legacy_identity_installed() {
     local probe signed=1
     # A locked keychain still lists its identities but cannot sign with them,
     # and this one is locked after every reboot; unlock it before asking.
-    security unlock-keychain -p vorssaint-signing \
-        "$HOME/Library/Keychains/vorssaint-signing.keychain-db" 2>/dev/null || true
+    security unlock-keychain -p rukn-signing \
+        "$HOME/Library/Keychains/rukn-signing.keychain-db" 2>/dev/null || true
     probe="$(mktemp)"
     cp /bin/echo "$probe"
     /usr/bin/codesign --force --strip-disallowed-xattrs --sign "$LEGACY_IDENTITY" "$probe" \
@@ -184,8 +185,8 @@ finalize_installed_bundle_after_child() {
     echo "✓ Signature ready: $bundle"
 }
 
-if (( INSTALL && ! TEST )) && [[ "${VORSSAINT_INSTALL_CHILD:-0}" != "1" ]]; then
-    VORSSAINT_INSTALL_CHILD=1 "$0" "$@"
+if (( INSTALL && ! TEST )) && [[ "${RUKN_INSTALL_CHILD:-0}" != "1" ]]; then
+    RUKN_INSTALL_CHILD=1 "$0" "$@"
     child_status=$?
     if (( child_status != 0 )); then
         exit "$child_status"
@@ -224,13 +225,13 @@ discard_test_preferences() {
     # cfprefsd can recreate an emptied domain after the first removal. Require
     # two quiet checks, but keep a hard limit so persistent failures still fail CI.
     for attempt in {1..10}; do
-        for name in "vorss.tests." "com.vorssaint.tests."; do
+        for name in "vorss.tests." "com.hussainiholding.rukn.tests."; do
             rm -f "$preferences"/$name*.plist(N)
         done
         rm -f "$preferences/metrics-tests.plist"
         sleep 0.2
         survivors=$(find "$preferences" -maxdepth 1 \
-            \( -name "vorss.tests.*.plist" -o -name "com.vorssaint.tests.*.plist" \
+            \( -name "vorss.tests.*.plist" -o -name "com.hussainiholding.rukn.tests.*.plist" \
                -o -name "metrics-tests.plist" \) 2>/dev/null | wc -l | tr -d ' ')
         if [[ "$survivors" == "0" ]]; then
             quiet_passes=$((quiet_passes + 1))
@@ -250,286 +251,286 @@ if (( TEST )); then
     TEST_OBJECT_DIR="build/objects/tests"
     mkdir -p "$TEST_OBJECT_DIR"
     TEST_SOURCES=(
-        Sources/Vorssaint/Services/Media/MediaSupport.swift
-        Sources/Vorssaint/Core/QuitProtectionSupport.swift
-        Sources/Vorssaint/Core/QuitProtectionStrings.swift
-        Sources/Vorssaint/Core/Defaults.swift
-        Sources/Vorssaint/Core/NotchStrings.swift
-        Sources/Vorssaint/Core/NotchTourStrings.swift
-        Sources/Vorssaint/Core/NotchEditorStrings.swift
-        Sources/Vorssaint/UI/Settings/NotchSettingsTabRow.swift
-        Sources/Vorssaint/Core/NotchActivityStrings.swift
-        Sources/Vorssaint/Services/Notch/NotchTimerSupport.swift
-        Sources/Vorssaint/Services/Notch/NotchTimerAlert.swift
-        Sources/Vorssaint/Services/Notch/NotchAccessorySupport.swift
-        Sources/Vorssaint/Services/QuickTools/CameraPreviewSupport.swift
-        Sources/Vorssaint/Core/NotchMusicExtrasStrings.swift
-        Sources/Vorssaint/Services/Notch/NotchLyricsSupport.swift
-        Sources/Vorssaint/Services/Notch/NotchQueueSupport.swift
-        Sources/Vorssaint/Core/NotchFilesStrings.swift
-        Sources/Vorssaint/Services/Notch/NotchFileToolsSupport.swift
-        Sources/Vorssaint/Services/Notch/NotchDownloadSupport.swift
-        Sources/Vorssaint/Services/Notch/NotchDownloadProgressObserver.swift
-        Sources/Vorssaint/Core/NotchCalendarStrings.swift
-        Sources/Vorssaint/Core/NotchNotificationStrings.swift
-        Sources/Vorssaint/Core/NotchGestureStrings.swift
-        Sources/Vorssaint/Core/NotchAgentStrings.swift
-        Sources/Vorssaint/Services/Notch/NotchAgentSupport.swift
-        Sources/Vorssaint/Core/NotchLockScreenStrings.swift
-        Sources/Vorssaint/Services/Notch/NotchLockScreenSupport.swift
-        Sources/Vorssaint/Services/AgentUsage/AgentUsageModels.swift
-        Sources/Vorssaint/Services/AgentUsage/AgentPricing.swift
-        Sources/Vorssaint/Services/AgentUsage/AgentLogParser.swift
-        Sources/Vorssaint/Services/AgentUsage/AgentUsageSummary.swift
-        Sources/Vorssaint/Services/AgentUsage/AgentUsageStore.swift
-        Sources/Vorssaint/Services/AgentUsage/AgentUsageArchive.swift
-        Sources/Vorssaint/Services/AgentUsage/AgentClaudeAppUsage.swift
-        Sources/Vorssaint/Services/AgentUsage/AgentCodexServer.swift
-        Sources/Vorssaint/Services/AgentUsage/AgentOpenCodeReader.swift
-        Sources/Vorssaint/Services/Notch/NotchGestureSupport.swift
-        Sources/Vorssaint/Services/Notch/NotchSectionPaging.swift
-        Sources/Vorssaint/Services/Notch/NotchSliderEditing.swift
-        Sources/Vorssaint/Services/Notch/NotchNotificationSupport.swift
-        Sources/Vorssaint/Services/Notch/NotchNotificationReaderCore.swift
-        Sources/Vorssaint/Services/Notch/NotchCalendarSupport.swift
-        Sources/Vorssaint/Services/Notch/NotchKeepAwakeSupport.swift
-        Sources/Vorssaint/Services/Notch/NotchSupport.swift
-        Sources/Vorssaint/Services/Notch/NotchAudioLevelSupport.swift
-        Sources/Vorssaint/Services/Notch/NotchVolumeKeyGate.swift
-        Sources/Vorssaint/Services/Notch/NotchMusicSupport.swift
-        Sources/Vorssaint/UI/Notch/NotchEqualizerBars.swift
-        Sources/Vorssaint/UI/Notch/NotchScrollEdgeFade.swift
-        Sources/Vorssaint/UI/Notch/NotchAgentAnimationView.swift
-        Sources/Vorssaint/UI/WindowVisibilityReader.swift
-        Sources/Vorssaint/Services/Notch/NotchMusicAutomationSupport.swift
-        Sources/Vorssaint/Services/Notch/NotchMusicAutomation.swift
-        Sources/Vorssaint/Services/Notch/NotchPlaybackSource.swift
-        Sources/Vorssaint/Services/Notch/NotchPlaybackCommand.swift
-        Sources/Vorssaint/Services/Notch/NotchMusicCommandWriter.swift
-        Sources/Vorssaint/Core/FeatureCatalog.swift
-        Sources/Vorssaint/Core/FeaturePresets.swift
-        Sources/Vorssaint/Core/FeatureHubStrings.swift
-        Sources/Vorssaint/Core/ShortcutSettingsStrings.swift
-        Sources/Vorssaint/Core/SettingsBackupSupport.swift
-        Sources/Vorssaint/Core/BackupStrings.swift
-        Sources/Vorssaint/Core/SnippetStrings.swift
-        Sources/Vorssaint/Core/AlertSoundStrings.swift
-        Sources/Vorssaint/Core/BrightnessStrings.swift
-        Sources/Vorssaint/Core/MediaImageStrings.swift
-        Sources/Vorssaint/Core/QuickToggleStrings.swift
-        Sources/Vorssaint/Core/ScreenshotStrings.swift
-        Sources/Vorssaint/Core/RecentCaptureStrings.swift
-        Sources/Vorssaint/Core/RecorderStrings.swift
-        Sources/Vorssaint/Core/RecorderShareStrings.swift
-        Sources/Vorssaint/Core/CameraPreviewStrings.swift
-        Sources/Vorssaint/Core/WallpaperStrings.swift
-        Sources/Vorssaint/Services/Wallpaper/WallpaperSupport.swift
-        Sources/Vorssaint/Core/ScratchpadStrings.swift
-        Sources/Vorssaint/Core/FinderRenameStrings.swift
-        Sources/Vorssaint/Core/CommandBarStrings.swift
-        Sources/Vorssaint/Core/FeedbackStrings.swift
-        Sources/Vorssaint/Core/RadialMenuStrings.swift
-        Sources/Vorssaint/Core/MenuBarAppearanceStrings.swift
-        Sources/Vorssaint/Core/AppAppearance.swift
-        Sources/Vorssaint/Core/AppearanceStrings.swift
-        Sources/Vorssaint/Core/GeneralSettingsStrings.swift
-        Sources/Vorssaint/Core/SettingsPageStrings.swift
-        Sources/Vorssaint/Core/BatteryTimeStrings.swift
-        Sources/Vorssaint/Core/KeepAwakeStrings.swift
-        Sources/Vorssaint/Core/BluetoothSleepStrings.swift
-        Sources/Vorssaint/Core/PermissionGuideStrings.swift
-        Sources/Vorssaint/Core/FanControlStrings.swift
-        Sources/Vorssaint/Core/ConnectedDevicesStrings.swift
-        Sources/Vorssaint/Services/FanControl/FanControlSupport.swift
-        Sources/Vorssaint/Services/FanControl/FanControlResumeSupport.swift
-        Sources/Vorssaint/Services/Snippets/TextSnippetSupport.swift
-        Sources/Vorssaint/Services/RadialMenu/RadialMenuSupport.swift
-        Sources/Vorssaint/Services/QuickTools/ScratchpadSupport.swift
-        Sources/Vorssaint/Services/QuickTools/ScratchpadStore.swift
-        Sources/Vorssaint/Services/KillProcess/KillProcessSupport.swift
-        Sources/Vorssaint/Services/Recorder/RecorderSupport.swift
-        Sources/Vorssaint/Services/Recorder/RecorderSampleTiming.swift
-        Sources/Vorssaint/Services/Recorder/RecorderWriter.swift
-        Sources/Vorssaint/Services/Recorder/RecorderCaptureEngine.swift
-        Sources/Vorssaint/Core/RecorderExportStrings.swift
-        Sources/Vorssaint/Services/Recorder/RecorderComposer.swift
-        Sources/Vorssaint/Services/Recorder/RecorderComposerPlan.swift
-        Sources/Vorssaint/Services/Recorder/RecorderCursorSprite.swift
-        Sources/Vorssaint/Services/Recorder/RecorderTextRenderer.swift
-        Sources/Vorssaint/Services/Recorder/RecorderImageRenderer.swift
-        Sources/Vorssaint/Services/Recorder/RecorderExporter.swift
-        Sources/Vorssaint/Services/Recorder/RecorderGIFClipboard.swift
-        Sources/Vorssaint/Services/Recorder/RecorderComposition.swift
-        Sources/Vorssaint/Services/Recorder/RecordingSharingSupport.swift
-        Sources/Vorssaint/Services/PrivateFileStore.swift
-        Sources/Vorssaint/Services/Recorder/RecorderTakeStore.swift
-        Sources/Vorssaint/Services/Recorder/RecorderPresetImageStore.swift
-        Sources/Vorssaint/Services/Recorder/RecorderMotion.swift
-        Sources/Vorssaint/Services/Recorder/RecorderPointerTrack.swift
-        Sources/Vorssaint/Services/Recorder/RecorderTypingTrack.swift
-        Sources/Vorssaint/Services/Recorder/RecorderTimeline.swift
-        Sources/Vorssaint/Services/Recorder/RecorderTextOverlay.swift
-        Sources/Vorssaint/Services/Recorder/RecorderImageOverlay.swift
-        Sources/Vorssaint/Services/Recorder/RecorderBlurRegion.swift
-        Sources/Vorssaint/Services/Recorder/RecorderEditDocument.swift
-        Sources/Vorssaint/Core/AppInfo.swift
-        Sources/Vorssaint/Core/GlobalShortcut.swift
-        Sources/Vorssaint/Core/SymbolicHotKeys.swift
-        Sources/Vorssaint/Services/SystemShortcutTakeoverSupport.swift
-        Sources/Vorssaint/Core/Localization.swift
-        Sources/Vorssaint/Core/Localizations/Strings+*.swift
-        Sources/Vorssaint/Core/FeatureStrings.swift
-        Sources/Vorssaint/Core/KillProcessStrings.swift
-        Sources/Vorssaint/Core/PortManagerStrings.swift
-        Sources/Vorssaint/Core/WhatsAppDownloadStrings.swift
-        Sources/Vorssaint/Core/WhatsAppOrganizerStrings.swift
-        Sources/Vorssaint/Core/ReleaseNotes.swift
-        Sources/Vorssaint/Core/URLCleaning.swift
-        Sources/Vorssaint/Services/GeneralPasteboardAccess.swift
-        Sources/Vorssaint/Services/Clipboard/ClipboardHistoryWrite.swift
-        Sources/Vorssaint/Services/Audio/AirPlayRouteManager.swift
-        Sources/Vorssaint/Services/Audio/MixerRoutingSupport.swift
-        Sources/Vorssaint/Services/Audio/MusicLaunchSupport.swift
-        Sources/Vorssaint/Services/Bluetooth/BluetoothSleepSupport.swift
-        Sources/Vorssaint/UI/MenuPanel/MixerPercentNativeTextField.swift
-        Sources/Vorssaint/UI/MenuPanel/MixerAppDragSource.swift
-        Sources/Vorssaint/Services/Audio/BoostLimiter.swift
-        Sources/Vorssaint/Services/Audio/MixerRender.swift
-        Sources/Vorssaint/Services/Audio/PreciseVolumeRollerSupport.swift
-        Sources/Vorssaint/Services/DockPreview/DockPreviewSupport.swift
-        Sources/Vorssaint/Services/DockPreview/DockAutohideHold.swift
-        Sources/Vorssaint/Services/Homebrew/HomebrewSupport.swift
-        Sources/Vorssaint/Services/Homebrew/HomebrewEnvironment.swift
-        Sources/Vorssaint/Services/AppUpdates/AppUpdatesSupport.swift
-        Sources/Vorssaint/Services/AppUpdates/AppUpdateFeedSupport.swift
-        Sources/Vorssaint/Core/AppUpdateStrings.swift
-        Sources/Vorssaint/Core/DiskImageInstallerStrings.swift
-        Sources/Vorssaint/Services/DiskImageInstaller/DiskImageInstallerSupport.swift
-        Sources/Vorssaint/UI/NonModalAlert.swift
-        Sources/Vorssaint/Services/Clipboard/ClipboardHistorySupport.swift
-        Sources/Vorssaint/Core/ColorValue.swift
-        Sources/Vorssaint/Services/Clipboard/ClipboardAutoClearSupport.swift
-        Sources/Vorssaint/Services/AutoQuit/AutoQuitSupport.swift
-        Sources/Vorssaint/Services/Shelf/ShelfSupport.swift
-        Sources/Vorssaint/Services/Shelf/ShelfFilePromiseTransfer.swift
-        Sources/Vorssaint/Core/ShelfPromiseDeliveryStrings.swift
-        Sources/Vorssaint/Services/Finder/FinderRenameSupport.swift
-        Sources/Vorssaint/Services/Update/UpdateInstallerSupport.swift
-        Sources/Vorssaint/Services/Update/UpdateServiceSupport.swift
-        Sources/Vorssaint/Services/InstalledApps.swift
-        Sources/Vorssaint/Services/LaunchAtLoginSupport.swift
-        Sources/Vorssaint/UI/Settings/SettingsSearchSupport.swift
-        Sources/Vorssaint/UI/Settings/SettingsSidebarSupport.swift
-        Sources/Vorssaint/UI/Settings/FeatureVisibilitySupport.swift
-        Sources/Vorssaint/UI/Settings/SettingsWindow.swift
-        Sources/Vorssaint/Core/SettingsNavigationStrings.swift
-        Sources/Vorssaint/App/MenuBarSpacingSupport.swift
-        Sources/Vorssaint/App/MenuBarAllowanceSupport.swift
-        Sources/Vorssaint/App/ReopenRequestSupport.swift
-        Sources/Vorssaint/App/StatusItemAnchorSupport.swift
-        Sources/Vorssaint/Services/DockClick/DockClickSupport.swift
-        Sources/Vorssaint/Services/Finder/CutPasteProgressSupport.swift
-        Sources/Vorssaint/Services/Finder/CutPastePrivilegeSupport.swift
-        Sources/Vorssaint/Services/Finder/FinderPasteImageSupport.swift
-        Sources/Vorssaint/Services/MiddleClick/MiddleClickSupport.swift
-        Sources/Vorssaint/Services/MouseNavigation/MouseNavigationSupport.swift
-        Sources/Vorssaint/Services/MouseNavigation/MouseNavigationKeys.swift
-        Sources/Vorssaint/Services/MouseButtons/MouseButtonShortcutSupport.swift
-        Sources/Vorssaint/Services/MouseButtons/MouseSpacesGestureSupport.swift
-        Sources/Vorssaint/Services/MouseClickDebounce/MouseClickDebounceSupport.swift
-        Sources/Vorssaint/Services/MouseExceptions/MouseAppExceptionSupport.swift
-        Sources/Vorssaint/Services/MouseExceptions/MouseAppExceptions.swift
-        Sources/Vorssaint/Services/WindowServerSupport.swift
-        Sources/Vorssaint/Services/WindowMaximizerSupport.swift
-        Sources/Vorssaint/Core/MouseButtonStrings.swift
-        Sources/Vorssaint/Core/MouseClickDebounceStrings.swift
-        Sources/Vorssaint/Core/MouseExceptionStrings.swift
-        Sources/Vorssaint/Core/ClipboardIgnoredAppsStrings.swift
-        Sources/Vorssaint/Core/WindowLayoutIgnoredAppsStrings.swift
-        Sources/Vorssaint/Services/WindowLayout/WindowLayoutIgnoredApps.swift
-        Sources/Vorssaint/Core/WindowPreviewExclusionStrings.swift
-        Sources/Vorssaint/Core/WindowMaximizerExclusionStrings.swift
-        Sources/Vorssaint/Core/DiskExclusionStrings.swift
-        Sources/Vorssaint/Core/SwitcherAppRulesStrings.swift
-        Sources/Vorssaint/Services/QuickTools/QuickToolsSupport.swift
-        Sources/Vorssaint/Services/CommandBar/CommandBarSupport.swift
-        Sources/Vorssaint/Services/CommandBar/CommandBarPreferences.swift
-        Sources/Vorssaint/Services/CommandBar/CommandBarMath.swift
-        Sources/Vorssaint/Services/CommandBar/CommandBarUnits.swift
-        Sources/Vorssaint/Services/CommandBar/CommandBarColors.swift
-        Sources/Vorssaint/Services/CommandBar/CommandBarEmoji.swift
-        Sources/Vorssaint/Services/CommandBar/CommandBarLinks.swift
-        Sources/Vorssaint/Services/CommandBar/CommandBarDates.swift
-        Sources/Vorssaint/Services/CommandBar/CommandBarRowShortcuts.swift
-        Sources/Vorssaint/Services/CommandBar/CommandBarSystemSettingsSupport.swift
-        Sources/Vorssaint/Services/CommandBar/CommandBarFileSearchSupport.swift
-        Sources/Vorssaint/Services/CommandBar/CommandBarQueryMemory.swift
-        Sources/Vorssaint/Services/SpotlightNamesSupport.swift
-        Sources/Vorssaint/Services/QuickTools/MicMuteSupport.swift
-        Sources/Vorssaint/Services/QuickTools/QuickTogglesSupport.swift
-        Sources/Vorssaint/Services/QuickTools/ScreenshotCapturePolicy.swift
-        Sources/Vorssaint/Services/QuickTools/ScreenshotSupport.swift
-        Sources/Vorssaint/UI/Settings/ScreenCaptureToolPicker.swift
-        Sources/Vorssaint/Services/QuickTools/ScreenshotRenderer.swift
-        Sources/Vorssaint/Services/QuickTools/RecentCaptureStore.swift
-        Sources/Vorssaint/Services/QuickTools/ScreenshotSharingSupport.swift
-        Sources/Vorssaint/Services/QuickTools/WindowActivationPolicy.swift
-        Sources/Vorssaint/Services/KeyboardDebounce/KeyboardDebounceSupport.swift
-        Sources/Vorssaint/Services/SuperKey/SuperKeySupport.swift
-        Sources/Vorssaint/Services/SuperKey/SuperKeyMappingGuard.swift
-        Sources/Vorssaint/Core/SuperKeyStrings.swift
-        Sources/Vorssaint/Core/InputSourceSelection.swift
-        Sources/Vorssaint/Services/SessionActivity.swift
-        Sources/Vorssaint/Services/SessionActivitySupport.swift
-        Sources/Vorssaint/Services/EventTimestamp.swift
-        Sources/Vorssaint/Services/OwnKeyEvent.swift
-        Sources/Vorssaint/Services/ScrollWheelSupport.swift
-        Sources/Vorssaint/Services/HorizontalWheelScrolling.swift
-        Sources/Vorssaint/Services/SmoothScrollSupport.swift
-        Sources/Vorssaint/Services/MouseAcceleration/MouseAccelerationSupport.swift
-        Sources/Vorssaint/Services/FocusFollowsMouse/FocusFollowsMouseSupport.swift
-        Sources/Vorssaint/Services/AssistiveKeyboard.swift
-        Sources/Vorssaint/Services/Switcher/SwitcherModels.swift
-        Sources/Vorssaint/Services/Switcher/WindowServerCaptureQueue.swift
-        Sources/Vorssaint/Services/Switcher/SwitcherSupport.swift
-        Sources/Vorssaint/Services/Switcher/SpaceHopSupport.swift
-        Sources/Vorssaint/Services/Switcher/WindowUseOrder.swift
-        Sources/Vorssaint/Services/Metrics/MetricFormat.swift
-        Sources/Vorssaint/Services/Metrics/VMStatisticsDecoder.swift
-        Sources/Vorssaint/Services/KeepAwakeAutomationSupport.swift
-        Sources/Vorssaint/Services/SudoersSupport.swift
-        Sources/Vorssaint/Services/Metrics/BatteryTimeSupport.swift
-        Sources/Vorssaint/Services/BoundedProcessRunner.swift
-        Sources/Vorssaint/Services/DetachedProcess.swift
-        Sources/Vorssaint/Services/ShellSupport.swift
-        Sources/Vorssaint/Services/PortManager/PortManagerSupport.swift
-        Sources/Vorssaint/Services/Metrics/NetworkProcessSupport.swift
-        Sources/Vorssaint/Services/Metrics/NetworkSampler.swift
-        Sources/Vorssaint/Services/Metrics/NetworkAddressService.swift
-        Sources/Vorssaint/Services/Metrics/SpeedTest.swift
-        Sources/Vorssaint/Services/Metrics/PeripheralBatterySampler.swift
-        Sources/Vorssaint/Services/Metrics/PeripheralBatterySupport.swift
-        Sources/Vorssaint/Services/Metrics/DiskSupport.swift
-        Sources/Vorssaint/Services/Metrics/MonitorSamplingPolicy.swift
-        Sources/Vorssaint/Services/Metrics/USBDeviceSampler.swift
-        Sources/Vorssaint/Services/Metrics/MaxCapacityProbe.swift
-        Sources/Vorssaint/Services/Metrics/TemperatureSensorSelector.swift
-        Sources/Vorssaint/Services/Metrics/SustainedAlertGate.swift
-        Sources/Vorssaint/Services/WindowLayout/WindowLayoutSupport.swift
-        Sources/Vorssaint/Services/WindowLayout/WindowGestureSupport.swift
-        Sources/Vorssaint/Core/WindowDirectionalStrings.swift
-        Sources/Vorssaint/Core/PointerDisplayStrings.swift
-        Sources/Vorssaint/Services/CleaningMode/CleaningUnlockCounter.swift
-        Sources/Vorssaint/Services/CleaningMode/CleaningMouseReleaseGate.swift
-        Sources/Vorssaint/Services/Display/ExtraBrightnessSupport.swift
-        Sources/Vorssaint/Services/Display/BrightnessSupport.swift
-        Sources/Vorssaint/Services/Display/LidDimmingSupport.swift
-        Sources/Vorssaint/Services/Cleaner/CleanerSupport.swift
-        Sources/Vorssaint/Services/Cleaner/CleanerPolicy.swift
-        Sources/Vorssaint/Services/Cleaner/CleanerSchedule.swift
-        Sources/Vorssaint/Services/Uninstall/UninstallerSupport.swift
-        Sources/Vorssaint/Services/ManagedDownloads/WhatsAppDownloadSupport.swift
-        Sources/Vorssaint/Core/SecureInputSupport.swift
+        Sources/Rukn/Services/Media/MediaSupport.swift
+        Sources/Rukn/Core/QuitProtectionSupport.swift
+        Sources/Rukn/Core/QuitProtectionStrings.swift
+        Sources/Rukn/Core/Defaults.swift
+        Sources/Rukn/Core/NotchStrings.swift
+        Sources/Rukn/Core/NotchTourStrings.swift
+        Sources/Rukn/Core/NotchEditorStrings.swift
+        Sources/Rukn/UI/Settings/NotchSettingsTabRow.swift
+        Sources/Rukn/Core/NotchActivityStrings.swift
+        Sources/Rukn/Services/Notch/NotchTimerSupport.swift
+        Sources/Rukn/Services/Notch/NotchTimerAlert.swift
+        Sources/Rukn/Services/Notch/NotchAccessorySupport.swift
+        Sources/Rukn/Services/QuickTools/CameraPreviewSupport.swift
+        Sources/Rukn/Core/NotchMusicExtrasStrings.swift
+        Sources/Rukn/Services/Notch/NotchLyricsSupport.swift
+        Sources/Rukn/Services/Notch/NotchQueueSupport.swift
+        Sources/Rukn/Core/NotchFilesStrings.swift
+        Sources/Rukn/Services/Notch/NotchFileToolsSupport.swift
+        Sources/Rukn/Services/Notch/NotchDownloadSupport.swift
+        Sources/Rukn/Services/Notch/NotchDownloadProgressObserver.swift
+        Sources/Rukn/Core/NotchCalendarStrings.swift
+        Sources/Rukn/Core/NotchNotificationStrings.swift
+        Sources/Rukn/Core/NotchGestureStrings.swift
+        Sources/Rukn/Core/NotchAgentStrings.swift
+        Sources/Rukn/Services/Notch/NotchAgentSupport.swift
+        Sources/Rukn/Core/NotchLockScreenStrings.swift
+        Sources/Rukn/Services/Notch/NotchLockScreenSupport.swift
+        Sources/Rukn/Services/AgentUsage/AgentUsageModels.swift
+        Sources/Rukn/Services/AgentUsage/AgentPricing.swift
+        Sources/Rukn/Services/AgentUsage/AgentLogParser.swift
+        Sources/Rukn/Services/AgentUsage/AgentUsageSummary.swift
+        Sources/Rukn/Services/AgentUsage/AgentUsageStore.swift
+        Sources/Rukn/Services/AgentUsage/AgentUsageArchive.swift
+        Sources/Rukn/Services/AgentUsage/AgentClaudeAppUsage.swift
+        Sources/Rukn/Services/AgentUsage/AgentCodexServer.swift
+        Sources/Rukn/Services/AgentUsage/AgentOpenCodeReader.swift
+        Sources/Rukn/Services/Notch/NotchGestureSupport.swift
+        Sources/Rukn/Services/Notch/NotchSectionPaging.swift
+        Sources/Rukn/Services/Notch/NotchSliderEditing.swift
+        Sources/Rukn/Services/Notch/NotchNotificationSupport.swift
+        Sources/Rukn/Services/Notch/NotchNotificationReaderCore.swift
+        Sources/Rukn/Services/Notch/NotchCalendarSupport.swift
+        Sources/Rukn/Services/Notch/NotchKeepAwakeSupport.swift
+        Sources/Rukn/Services/Notch/NotchSupport.swift
+        Sources/Rukn/Services/Notch/NotchAudioLevelSupport.swift
+        Sources/Rukn/Services/Notch/NotchVolumeKeyGate.swift
+        Sources/Rukn/Services/Notch/NotchMusicSupport.swift
+        Sources/Rukn/UI/Notch/NotchEqualizerBars.swift
+        Sources/Rukn/UI/Notch/NotchScrollEdgeFade.swift
+        Sources/Rukn/UI/Notch/NotchAgentAnimationView.swift
+        Sources/Rukn/UI/WindowVisibilityReader.swift
+        Sources/Rukn/Services/Notch/NotchMusicAutomationSupport.swift
+        Sources/Rukn/Services/Notch/NotchMusicAutomation.swift
+        Sources/Rukn/Services/Notch/NotchPlaybackSource.swift
+        Sources/Rukn/Services/Notch/NotchPlaybackCommand.swift
+        Sources/Rukn/Services/Notch/NotchMusicCommandWriter.swift
+        Sources/Rukn/Core/FeatureCatalog.swift
+        Sources/Rukn/Core/FeaturePresets.swift
+        Sources/Rukn/Core/FeatureHubStrings.swift
+        Sources/Rukn/Core/ShortcutSettingsStrings.swift
+        Sources/Rukn/Core/SettingsBackupSupport.swift
+        Sources/Rukn/Core/BackupStrings.swift
+        Sources/Rukn/Core/SnippetStrings.swift
+        Sources/Rukn/Core/AlertSoundStrings.swift
+        Sources/Rukn/Core/BrightnessStrings.swift
+        Sources/Rukn/Core/MediaImageStrings.swift
+        Sources/Rukn/Core/QuickToggleStrings.swift
+        Sources/Rukn/Core/ScreenshotStrings.swift
+        Sources/Rukn/Core/RecentCaptureStrings.swift
+        Sources/Rukn/Core/RecorderStrings.swift
+        Sources/Rukn/Core/RecorderShareStrings.swift
+        Sources/Rukn/Core/CameraPreviewStrings.swift
+        Sources/Rukn/Core/WallpaperStrings.swift
+        Sources/Rukn/Services/Wallpaper/WallpaperSupport.swift
+        Sources/Rukn/Core/ScratchpadStrings.swift
+        Sources/Rukn/Core/FinderRenameStrings.swift
+        Sources/Rukn/Core/CommandBarStrings.swift
+        Sources/Rukn/Core/FeedbackStrings.swift
+        Sources/Rukn/Core/RadialMenuStrings.swift
+        Sources/Rukn/Core/MenuBarAppearanceStrings.swift
+        Sources/Rukn/Core/AppAppearance.swift
+        Sources/Rukn/Core/AppearanceStrings.swift
+        Sources/Rukn/Core/GeneralSettingsStrings.swift
+        Sources/Rukn/Core/SettingsPageStrings.swift
+        Sources/Rukn/Core/BatteryTimeStrings.swift
+        Sources/Rukn/Core/KeepAwakeStrings.swift
+        Sources/Rukn/Core/BluetoothSleepStrings.swift
+        Sources/Rukn/Core/PermissionGuideStrings.swift
+        Sources/Rukn/Core/FanControlStrings.swift
+        Sources/Rukn/Core/ConnectedDevicesStrings.swift
+        Sources/Rukn/Services/FanControl/FanControlSupport.swift
+        Sources/Rukn/Services/FanControl/FanControlResumeSupport.swift
+        Sources/Rukn/Services/Snippets/TextSnippetSupport.swift
+        Sources/Rukn/Services/RadialMenu/RadialMenuSupport.swift
+        Sources/Rukn/Services/QuickTools/ScratchpadSupport.swift
+        Sources/Rukn/Services/QuickTools/ScratchpadStore.swift
+        Sources/Rukn/Services/KillProcess/KillProcessSupport.swift
+        Sources/Rukn/Services/Recorder/RecorderSupport.swift
+        Sources/Rukn/Services/Recorder/RecorderSampleTiming.swift
+        Sources/Rukn/Services/Recorder/RecorderWriter.swift
+        Sources/Rukn/Services/Recorder/RecorderCaptureEngine.swift
+        Sources/Rukn/Core/RecorderExportStrings.swift
+        Sources/Rukn/Services/Recorder/RecorderComposer.swift
+        Sources/Rukn/Services/Recorder/RecorderComposerPlan.swift
+        Sources/Rukn/Services/Recorder/RecorderCursorSprite.swift
+        Sources/Rukn/Services/Recorder/RecorderTextRenderer.swift
+        Sources/Rukn/Services/Recorder/RecorderImageRenderer.swift
+        Sources/Rukn/Services/Recorder/RecorderExporter.swift
+        Sources/Rukn/Services/Recorder/RecorderGIFClipboard.swift
+        Sources/Rukn/Services/Recorder/RecorderComposition.swift
+        Sources/Rukn/Services/Recorder/RecordingSharingSupport.swift
+        Sources/Rukn/Services/PrivateFileStore.swift
+        Sources/Rukn/Services/Recorder/RecorderTakeStore.swift
+        Sources/Rukn/Services/Recorder/RecorderPresetImageStore.swift
+        Sources/Rukn/Services/Recorder/RecorderMotion.swift
+        Sources/Rukn/Services/Recorder/RecorderPointerTrack.swift
+        Sources/Rukn/Services/Recorder/RecorderTypingTrack.swift
+        Sources/Rukn/Services/Recorder/RecorderTimeline.swift
+        Sources/Rukn/Services/Recorder/RecorderTextOverlay.swift
+        Sources/Rukn/Services/Recorder/RecorderImageOverlay.swift
+        Sources/Rukn/Services/Recorder/RecorderBlurRegion.swift
+        Sources/Rukn/Services/Recorder/RecorderEditDocument.swift
+        Sources/Rukn/Core/AppInfo.swift
+        Sources/Rukn/Core/GlobalShortcut.swift
+        Sources/Rukn/Core/SymbolicHotKeys.swift
+        Sources/Rukn/Services/SystemShortcutTakeoverSupport.swift
+        Sources/Rukn/Core/Localization.swift
+        Sources/Rukn/Core/Localizations/Strings+*.swift
+        Sources/Rukn/Core/FeatureStrings.swift
+        Sources/Rukn/Core/KillProcessStrings.swift
+        Sources/Rukn/Core/PortManagerStrings.swift
+        Sources/Rukn/Core/WhatsAppDownloadStrings.swift
+        Sources/Rukn/Core/WhatsAppOrganizerStrings.swift
+        Sources/Rukn/Core/ReleaseNotes.swift
+        Sources/Rukn/Core/URLCleaning.swift
+        Sources/Rukn/Services/GeneralPasteboardAccess.swift
+        Sources/Rukn/Services/Clipboard/ClipboardHistoryWrite.swift
+        Sources/Rukn/Services/Audio/AirPlayRouteManager.swift
+        Sources/Rukn/Services/Audio/MixerRoutingSupport.swift
+        Sources/Rukn/Services/Audio/MusicLaunchSupport.swift
+        Sources/Rukn/Services/Bluetooth/BluetoothSleepSupport.swift
+        Sources/Rukn/UI/MenuPanel/MixerPercentNativeTextField.swift
+        Sources/Rukn/UI/MenuPanel/MixerAppDragSource.swift
+        Sources/Rukn/Services/Audio/BoostLimiter.swift
+        Sources/Rukn/Services/Audio/MixerRender.swift
+        Sources/Rukn/Services/Audio/PreciseVolumeRollerSupport.swift
+        Sources/Rukn/Services/DockPreview/DockPreviewSupport.swift
+        Sources/Rukn/Services/DockPreview/DockAutohideHold.swift
+        Sources/Rukn/Services/Homebrew/HomebrewSupport.swift
+        Sources/Rukn/Services/Homebrew/HomebrewEnvironment.swift
+        Sources/Rukn/Services/AppUpdates/AppUpdatesSupport.swift
+        Sources/Rukn/Services/AppUpdates/AppUpdateFeedSupport.swift
+        Sources/Rukn/Core/AppUpdateStrings.swift
+        Sources/Rukn/Core/DiskImageInstallerStrings.swift
+        Sources/Rukn/Services/DiskImageInstaller/DiskImageInstallerSupport.swift
+        Sources/Rukn/UI/NonModalAlert.swift
+        Sources/Rukn/Services/Clipboard/ClipboardHistorySupport.swift
+        Sources/Rukn/Core/ColorValue.swift
+        Sources/Rukn/Services/Clipboard/ClipboardAutoClearSupport.swift
+        Sources/Rukn/Services/AutoQuit/AutoQuitSupport.swift
+        Sources/Rukn/Services/Shelf/ShelfSupport.swift
+        Sources/Rukn/Services/Shelf/ShelfFilePromiseTransfer.swift
+        Sources/Rukn/Core/ShelfPromiseDeliveryStrings.swift
+        Sources/Rukn/Services/Finder/FinderRenameSupport.swift
+        Sources/Rukn/Services/Update/UpdateInstallerSupport.swift
+        Sources/Rukn/Services/Update/UpdateServiceSupport.swift
+        Sources/Rukn/Services/InstalledApps.swift
+        Sources/Rukn/Services/LaunchAtLoginSupport.swift
+        Sources/Rukn/UI/Settings/SettingsSearchSupport.swift
+        Sources/Rukn/UI/Settings/SettingsSidebarSupport.swift
+        Sources/Rukn/UI/Settings/FeatureVisibilitySupport.swift
+        Sources/Rukn/UI/Settings/SettingsWindow.swift
+        Sources/Rukn/Core/SettingsNavigationStrings.swift
+        Sources/Rukn/App/MenuBarSpacingSupport.swift
+        Sources/Rukn/App/MenuBarAllowanceSupport.swift
+        Sources/Rukn/App/ReopenRequestSupport.swift
+        Sources/Rukn/App/StatusItemAnchorSupport.swift
+        Sources/Rukn/Services/DockClick/DockClickSupport.swift
+        Sources/Rukn/Services/Finder/CutPasteProgressSupport.swift
+        Sources/Rukn/Services/Finder/CutPastePrivilegeSupport.swift
+        Sources/Rukn/Services/Finder/FinderPasteImageSupport.swift
+        Sources/Rukn/Services/MiddleClick/MiddleClickSupport.swift
+        Sources/Rukn/Services/MouseNavigation/MouseNavigationSupport.swift
+        Sources/Rukn/Services/MouseNavigation/MouseNavigationKeys.swift
+        Sources/Rukn/Services/MouseButtons/MouseButtonShortcutSupport.swift
+        Sources/Rukn/Services/MouseButtons/MouseSpacesGestureSupport.swift
+        Sources/Rukn/Services/MouseClickDebounce/MouseClickDebounceSupport.swift
+        Sources/Rukn/Services/MouseExceptions/MouseAppExceptionSupport.swift
+        Sources/Rukn/Services/MouseExceptions/MouseAppExceptions.swift
+        Sources/Rukn/Services/WindowServerSupport.swift
+        Sources/Rukn/Services/WindowMaximizerSupport.swift
+        Sources/Rukn/Core/MouseButtonStrings.swift
+        Sources/Rukn/Core/MouseClickDebounceStrings.swift
+        Sources/Rukn/Core/MouseExceptionStrings.swift
+        Sources/Rukn/Core/ClipboardIgnoredAppsStrings.swift
+        Sources/Rukn/Core/WindowLayoutIgnoredAppsStrings.swift
+        Sources/Rukn/Services/WindowLayout/WindowLayoutIgnoredApps.swift
+        Sources/Rukn/Core/WindowPreviewExclusionStrings.swift
+        Sources/Rukn/Core/WindowMaximizerExclusionStrings.swift
+        Sources/Rukn/Core/DiskExclusionStrings.swift
+        Sources/Rukn/Core/SwitcherAppRulesStrings.swift
+        Sources/Rukn/Services/QuickTools/QuickToolsSupport.swift
+        Sources/Rukn/Services/CommandBar/CommandBarSupport.swift
+        Sources/Rukn/Services/CommandBar/CommandBarPreferences.swift
+        Sources/Rukn/Services/CommandBar/CommandBarMath.swift
+        Sources/Rukn/Services/CommandBar/CommandBarUnits.swift
+        Sources/Rukn/Services/CommandBar/CommandBarColors.swift
+        Sources/Rukn/Services/CommandBar/CommandBarEmoji.swift
+        Sources/Rukn/Services/CommandBar/CommandBarLinks.swift
+        Sources/Rukn/Services/CommandBar/CommandBarDates.swift
+        Sources/Rukn/Services/CommandBar/CommandBarRowShortcuts.swift
+        Sources/Rukn/Services/CommandBar/CommandBarSystemSettingsSupport.swift
+        Sources/Rukn/Services/CommandBar/CommandBarFileSearchSupport.swift
+        Sources/Rukn/Services/CommandBar/CommandBarQueryMemory.swift
+        Sources/Rukn/Services/SpotlightNamesSupport.swift
+        Sources/Rukn/Services/QuickTools/MicMuteSupport.swift
+        Sources/Rukn/Services/QuickTools/QuickTogglesSupport.swift
+        Sources/Rukn/Services/QuickTools/ScreenshotCapturePolicy.swift
+        Sources/Rukn/Services/QuickTools/ScreenshotSupport.swift
+        Sources/Rukn/UI/Settings/ScreenCaptureToolPicker.swift
+        Sources/Rukn/Services/QuickTools/ScreenshotRenderer.swift
+        Sources/Rukn/Services/QuickTools/RecentCaptureStore.swift
+        Sources/Rukn/Services/QuickTools/ScreenshotSharingSupport.swift
+        Sources/Rukn/Services/QuickTools/WindowActivationPolicy.swift
+        Sources/Rukn/Services/KeyboardDebounce/KeyboardDebounceSupport.swift
+        Sources/Rukn/Services/SuperKey/SuperKeySupport.swift
+        Sources/Rukn/Services/SuperKey/SuperKeyMappingGuard.swift
+        Sources/Rukn/Core/SuperKeyStrings.swift
+        Sources/Rukn/Core/InputSourceSelection.swift
+        Sources/Rukn/Services/SessionActivity.swift
+        Sources/Rukn/Services/SessionActivitySupport.swift
+        Sources/Rukn/Services/EventTimestamp.swift
+        Sources/Rukn/Services/OwnKeyEvent.swift
+        Sources/Rukn/Services/ScrollWheelSupport.swift
+        Sources/Rukn/Services/HorizontalWheelScrolling.swift
+        Sources/Rukn/Services/SmoothScrollSupport.swift
+        Sources/Rukn/Services/MouseAcceleration/MouseAccelerationSupport.swift
+        Sources/Rukn/Services/FocusFollowsMouse/FocusFollowsMouseSupport.swift
+        Sources/Rukn/Services/AssistiveKeyboard.swift
+        Sources/Rukn/Services/Switcher/SwitcherModels.swift
+        Sources/Rukn/Services/Switcher/WindowServerCaptureQueue.swift
+        Sources/Rukn/Services/Switcher/SwitcherSupport.swift
+        Sources/Rukn/Services/Switcher/SpaceHopSupport.swift
+        Sources/Rukn/Services/Switcher/WindowUseOrder.swift
+        Sources/Rukn/Services/Metrics/MetricFormat.swift
+        Sources/Rukn/Services/Metrics/VMStatisticsDecoder.swift
+        Sources/Rukn/Services/KeepAwakeAutomationSupport.swift
+        Sources/Rukn/Services/SudoersSupport.swift
+        Sources/Rukn/Services/Metrics/BatteryTimeSupport.swift
+        Sources/Rukn/Services/BoundedProcessRunner.swift
+        Sources/Rukn/Services/DetachedProcess.swift
+        Sources/Rukn/Services/ShellSupport.swift
+        Sources/Rukn/Services/PortManager/PortManagerSupport.swift
+        Sources/Rukn/Services/Metrics/NetworkProcessSupport.swift
+        Sources/Rukn/Services/Metrics/NetworkSampler.swift
+        Sources/Rukn/Services/Metrics/NetworkAddressService.swift
+        Sources/Rukn/Services/Metrics/SpeedTest.swift
+        Sources/Rukn/Services/Metrics/PeripheralBatterySampler.swift
+        Sources/Rukn/Services/Metrics/PeripheralBatterySupport.swift
+        Sources/Rukn/Services/Metrics/DiskSupport.swift
+        Sources/Rukn/Services/Metrics/MonitorSamplingPolicy.swift
+        Sources/Rukn/Services/Metrics/USBDeviceSampler.swift
+        Sources/Rukn/Services/Metrics/MaxCapacityProbe.swift
+        Sources/Rukn/Services/Metrics/TemperatureSensorSelector.swift
+        Sources/Rukn/Services/Metrics/SustainedAlertGate.swift
+        Sources/Rukn/Services/WindowLayout/WindowLayoutSupport.swift
+        Sources/Rukn/Services/WindowLayout/WindowGestureSupport.swift
+        Sources/Rukn/Core/WindowDirectionalStrings.swift
+        Sources/Rukn/Core/PointerDisplayStrings.swift
+        Sources/Rukn/Services/CleaningMode/CleaningUnlockCounter.swift
+        Sources/Rukn/Services/CleaningMode/CleaningMouseReleaseGate.swift
+        Sources/Rukn/Services/Display/ExtraBrightnessSupport.swift
+        Sources/Rukn/Services/Display/BrightnessSupport.swift
+        Sources/Rukn/Services/Display/LidDimmingSupport.swift
+        Sources/Rukn/Services/Cleaner/CleanerSupport.swift
+        Sources/Rukn/Services/Cleaner/CleanerPolicy.swift
+        Sources/Rukn/Services/Cleaner/CleanerSchedule.swift
+        Sources/Rukn/Services/Uninstall/UninstallerSupport.swift
+        Sources/Rukn/Services/ManagedDownloads/WhatsAppDownloadSupport.swift
+        Sources/Rukn/Core/SecureInputSupport.swift
         Tests/*.swift
         build/generated-tests/*.swift
     )
@@ -537,7 +538,7 @@ if (( TEST )); then
     write_swift_output_file_map "$TEST_OUTPUT_FILE_MAP" "$TEST_OBJECT_DIR" "${TEST_SOURCES[@]}"
     echo "▸ Building & running tests against $(basename "$SDK")…"
     swiftc -Onone -incremental -enable-batch-mode -j "$(sysctl -n hw.logicalcpu)" \
-        -module-name VorssaintTests -output-file-map "$TEST_OUTPUT_FILE_MAP" \
+        -module-name RuknTests -output-file-map "$TEST_OUTPUT_FILE_MAP" \
         -target "$TARGET" -sdk "$SDK" "${SDK_COMPAT_FLAGS[@]}" \
         "${VM_STATISTICS_COMPAT_FLAGS[@]}" "${TEST_SOURCES[@]}" -o build/metrics-tests
     test_status=0
@@ -550,7 +551,7 @@ if (( TEST )); then
 fi
 
 echo "▸ Compiling ($BUILD_CONFIGURATION) against $(basename "$SDK")…"
-APP_SOURCES=(Sources/Vorssaint/**/*.swift)
+APP_SOURCES=(Sources/Rukn/**/*.swift)
 if (( ! DEV )); then
     # A release starts from an empty build directory, so nothing an earlier
     # build left behind (an old icon catalog, a staged bundle) can reach it.
@@ -574,23 +575,23 @@ swiftc "${APP_OPTIMIZATION_FLAGS[@]}" -incremental -enable-batch-mode -j "$(sysc
 
 echo "▸ Compiling protected fan helper…"
 swiftc -O -target "$TARGET" -sdk "$SDK" "${SDK_COMPAT_FLAGS[@]}" "${BUILD_VARIANT_FLAGS[@]}" \
-    Sources/Vorssaint/Services/FanControl/FanControlSupport.swift \
-    Sources/Vorssaint/Services/FanControl/FanControlXPC.swift \
-    Sources/Vorssaint/Services/SystemMonitor/SMCClient.swift \
-    Sources/Vorssaint/Services/Metrics/TemperatureSensorSelector.swift \
-    Sources/Vorssaint/Services/FanControl/FanControlHardware.swift \
+    Sources/Rukn/Services/FanControl/FanControlSupport.swift \
+    Sources/Rukn/Services/FanControl/FanControlXPC.swift \
+    Sources/Rukn/Services/SystemMonitor/SMCClient.swift \
+    Sources/Rukn/Services/Metrics/TemperatureSensorSelector.swift \
+    Sources/Rukn/Services/FanControl/FanControlHardware.swift \
     Sources/FanControlHelper/main.swift \
     -o "build/$FAN_HELPER_ID"
 "build/$FAN_HELPER_ID" --selftest
 
 echo "▸ Compiling Now Playing adapter…"
 swiftc -O -target "$TARGET" -sdk "$SDK" "${SDK_COMPAT_FLAGS[@]}" -emit-library \
-    -module-name VorssaintNowPlaying \
+    -module-name RuknNowPlaying \
     Sources/NowPlayingAdapter/NowPlayingAdapter.swift \
     Sources/NowPlayingAdapter/NowPlayingQueue.swift \
     Sources/NowPlayingAdapter/NowPlayingSelection.swift \
-    Sources/Vorssaint/Services/Notch/NotchPlaybackSource.swift \
-    Sources/Vorssaint/Services/Notch/NotchPlaybackCommand.swift \
+    Sources/Rukn/Services/Notch/NotchPlaybackSource.swift \
+    Sources/Rukn/Services/Notch/NotchPlaybackCommand.swift \
     -o "build/$NOW_PLAYING_ADAPTER"
 
 echo "▸ Generating app icon…"
@@ -636,7 +637,7 @@ mkdir -p "$STAGE/Contents/Frameworks"
 cp "build/$NOW_PLAYING_ADAPTER" "$STAGE/Contents/Frameworks/$NOW_PLAYING_ADAPTER"
 cp Resources/now-playing.pl "$STAGE/Contents/Resources/now-playing.pl"
 cp Resources/agent-prices.json "$STAGE/Contents/Resources/agent-prices.json"
-cp Resources/com.vorssaint.utils.fan-control.plist \
+cp Resources/com.hussainiholding.rukn.fan-control.plist \
     "$STAGE/Contents/Library/LaunchDaemons/$FAN_HELPER_ID.plist"
 cp Resources/Info.plist "$STAGE/Contents/Info.plist"
 cp CHANGELOG.md "$STAGE/Contents/Resources/CHANGELOG.md"
@@ -653,14 +654,14 @@ if (( DEV )); then
     FAN_PLIST="$STAGE/Contents/Library/LaunchDaemons/$FAN_HELPER_ID.plist"
     /usr/libexec/PlistBuddy -c "Set :Label $FAN_HELPER_ID" "$FAN_PLIST"
     /usr/libexec/PlistBuddy -c "Set :BundleProgram Contents/Library/LaunchServices/$FAN_HELPER_ID" "$FAN_PLIST"
-    /usr/libexec/PlistBuddy -c "Delete :MachServices:com.vorssaint.utils.fan-control" "$FAN_PLIST"
+    /usr/libexec/PlistBuddy -c "Delete :MachServices:com.hussainiholding.rukn.fan-control" "$FAN_PLIST"
     /usr/libexec/PlistBuddy -c "Add :MachServices:$FAN_HELPER_ID bool true" "$FAN_PLIST"
     # Stamp the source commit + build time so the running dev app shows (in About)
     # exactly which code it was compiled from. Lets you verify it matches HEAD before
     # testing, instead of unknowingly running a stale build. Dev-only; never shipped.
     SHA="$(git rev-parse --short HEAD 2>/dev/null || echo unknown)"
     [[ -n "$(git status --porcelain 2>/dev/null)" ]] && SHA="$SHA-dirty"
-    /usr/libexec/PlistBuddy -c "Add :VorssaintBuildCommit string '$SHA · $(date '+%Y-%m-%d %H:%M')'" "$STAGE/Contents/Info.plist"
+    /usr/libexec/PlistBuddy -c "Add :RuknBuildCommit string '$SHA · $(date '+%Y-%m-%d %H:%M')'" "$STAGE/Contents/Info.plist"
     echo "  stamped dev build: $SHA"
 fi
 FAN_HELPER_VERSION="$(
@@ -671,7 +672,7 @@ FAN_HELPER_VERSION="$(
         | /usr/bin/awk '{print $1}' | /usr/bin/shasum -a 256 \
         | /usr/bin/awk '{print $1}'
 )"
-/usr/libexec/PlistBuddy -c "Add :VorssaintFanControlHelperVersion string '$FAN_HELPER_VERSION'" \
+/usr/libexec/PlistBuddy -c "Add :RuknFanControlHelperVersion string '$FAN_HELPER_VERSION'" \
     "$STAGE/Contents/Info.plist"
 printf 'APPL????' > "$STAGE/Contents/PkgInfo"
 cp build/AppIcon.icns "$STAGE/Contents/Resources/AppIcon.icns"
@@ -699,7 +700,7 @@ xattr -c -r "$STAGE" 2>/dev/null || true
 #      notarization), the app's entitlements and a secure timestamp. Gives a
 #      stable, team-based designated requirement, so permissions persist across
 #      updates AND Gatekeeper shows no "unverified developer" warning.
-#   2. "Vorssaint Utils Signing" — the legacy stable self-signed identity, kept
+#   2. "Rukn Signing" — the legacy stable self-signed identity, kept
 #      as a fallback so contributors without a Developer ID still get a constant
 #      designated requirement across their local builds.
 #   3. Ad-hoc — fresh clone with no identity at all.
@@ -861,7 +862,7 @@ if (( INSTALL )); then
     stop_process "$EXECUTABLE"
     # Remove the pre-rename apps so two menu bar items never coexist. Same bundle
     # id, so macOS keeps the granted permissions for the new bundle.
-    for legacy in "Vorss:Vorss" "Vorssaint Utils:VorssaintUtils"; do
+    for legacy in "Vorss:Vorss" "Rukn:Rukn"; do
         name="${legacy%%:*}"; proc="${legacy##*:}"
         if [[ -d "/Applications/$name.app" ]]; then
             stop_process "$proc"

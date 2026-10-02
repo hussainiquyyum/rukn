@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 // Copyright (C) 2026 Vorssaint
+// Copyright (C) 2026 Hussaini Holding
 
 import AppKit
 import Carbon.HIToolbox
@@ -47,15 +48,15 @@ enum StorageFeatureTests {
                "no failure, no permission note")
         // Both done states have to route through that decision and name what
         // survived; neither may spell a tick of its own.
-        for path in ["Sources/Vorssaint/UI/Uninstall/UninstallerView.swift",
-                     "Sources/Vorssaint/UI/MenuPanel/PanelUninstallerView.swift"] {
+        for path in ["Sources/Rukn/UI/Uninstall/UninstallerView.swift",
+                     "Sources/Rukn/UI/MenuPanel/PanelUninstallerView.swift"] {
             let source = (try? String(contentsOfFile: path, encoding: .utf8)) ?? ""
             suite.expect(source.contains("UninstallFailureNote(items:"),
                    "\(path) names what the removal left behind")
             suite.expect(!source.contains("\"checkmark.circle.fill\""),
                    "\(path) takes its done symbol from UninstallerSupport")
         }
-        let sharedUISource = (try? String(contentsOfFile: "Sources/Vorssaint/UI/SharedUI.swift",
+        let sharedUISource = (try? String(contentsOfFile: "Sources/Rukn/UI/SharedUI.swift",
                                           encoding: .utf8)) ?? ""
         suite.expect(sharedUISource.contains("uninstallerFailedNeedsFDA"),
                "the failure note explains the permission the removal needed")

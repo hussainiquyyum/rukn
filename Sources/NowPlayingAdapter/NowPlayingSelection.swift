@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 // Copyright (C) 2026 Vorssaint
+// Copyright (C) 2026 Hussaini Holding
 
 import AppKit
 import Foundation
@@ -26,7 +27,7 @@ enum NotchNativePlayback {
     }
 
     private static let handle = dlopen("/System/Library/PrivateFrameworks/MediaRemote.framework/MediaRemote", RTLD_LAZY)
-    private static let callbacks = DispatchQueue(label: "com.vorssaint.now-playing-selection-callbacks")
+    private static let callbacks = DispatchQueue(label: "com.hussainiholding.rukn.now-playing-selection-callbacks")
     private static let lock = NSLock()
     private static var selected: Target?
     private static var identity: Identity?

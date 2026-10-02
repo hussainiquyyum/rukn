@@ -1,6 +1,7 @@
 #!/bin/zsh
 # SPDX-License-Identifier: GPL-3.0-or-later
 # Copyright (C) 2026 Vorssaint
+# Copyright (C) 2026 Hussaini Holding
 
 set -euo pipefail
 cd "$(dirname "$0")/.."
@@ -13,7 +14,7 @@ trap 'command rm -rf "$cleanup_test_dir"' EXIT
 remaining_writes=2
 sleep() {
     if (( remaining_writes > 0 )); then
-        print '{}' > "$cleanup_test_dir/com.vorssaint.tests.delayed.plist"
+        print '{}' > "$cleanup_test_dir/com.hussainiholding.rukn.tests.delayed.plist"
         remaining_writes=$((remaining_writes - 1))
     fi
 }
@@ -21,7 +22,7 @@ print '{}' > "$cleanup_test_dir/vorss.tests.first.plist"
 print '{}' > "$cleanup_test_dir/metrics-tests.plist"
 print 'preserve' > "$cleanup_test_dir/unrelated.plist"
 discard_test_preferences "$cleanup_test_dir"
-[[ ! -e "$cleanup_test_dir/com.vorssaint.tests.delayed.plist" ]]
+[[ ! -e "$cleanup_test_dir/com.hussainiholding.rukn.tests.delayed.plist" ]]
 [[ ! -e "$cleanup_test_dir/vorss.tests.first.plist" ]]
 [[ ! -e "$cleanup_test_dir/metrics-tests.plist" ]]
 [[ "$(cat "$cleanup_test_dir/unrelated.plist")" == preserve ]]

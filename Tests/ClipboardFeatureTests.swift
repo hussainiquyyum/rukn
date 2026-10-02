@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 // Copyright (C) 2026 Vorssaint
+// Copyright (C) 2026 Hussaini Holding
 
 import AppKit
 import Carbon.HIToolbox
@@ -781,7 +782,7 @@ enum ClipboardFeatureTests {
         ClipboardHistoryImageEditorTests.run(suite)
         ClipboardHistoryAccessTests.run(suite)
 
-        let pasteboardAccess = GeneralPasteboardAccess(label: "Vorssaint.Tests.PasteboardAccess")
+        let pasteboardAccess = GeneralPasteboardAccess(label: "Rukn.Tests.PasteboardAccess")
         let pasteboardGroup = DispatchGroup()
         let pasteboardStateLock = NSLock()
         var activePasteboardOperations = 0
@@ -839,7 +840,7 @@ enum ClipboardFeatureTests {
         suite.expect(laneAnswer == 887, "the queued work runs once the lane comes free")
         suite.expect(laneAnsweredOnMain, "the pasteboard lane answers on the main queue")
         let pastePlainSource = (try? String(
-            contentsOfFile: "Sources/Vorssaint/Services/QuickTools/PastePlainService.swift",
+            contentsOfFile: "Sources/Rukn/Services/QuickTools/PastePlainService.swift",
             encoding: .utf8)) ?? ""
         suite.expect(pastePlainSource.contains("GeneralPasteboardAccess.shared.async"),
                "paste as plain text reads the clipboard on the lane, not on the main thread")

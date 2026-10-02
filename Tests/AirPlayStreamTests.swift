@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 // Copyright (C) 2026 Vorssaint
+// Copyright (C) 2026 Hussaini Holding
 
 import Foundation
 
@@ -129,7 +130,7 @@ enum AirPlayRingBufferContract {
     }
 }
 
-/// Only Vorssaint's own AirPlay entry streams through the route picker. Every
+/// Only Rukn's own AirPlay entry streams through the route picker. Every
 /// other output, including AirPlay devices macOS exposes, follows the normal
 /// device rules: listed means usable, missing means fall back to the default.
 enum AirPlayRouteContract {

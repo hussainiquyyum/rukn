@@ -1,6 +1,7 @@
 #!/bin/zsh
 # SPDX-License-Identifier: GPL-3.0-or-later
 # Copyright (C) 2026 Vorssaint
+# Copyright (C) 2026 Hussaini Holding
 
 # Notarizes and staples a built artifact (the .app or the .dmg) with Apple's
 # notary service, so Gatekeeper opens it without the "unverified developer"

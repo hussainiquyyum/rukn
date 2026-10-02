@@ -1,0 +1,24 @@
+{
+    "configurations": [
+        {
+            "type": "swift",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:mac-utils}",
+            "name": "Debug Rukn",
+            "target": "Rukn",
+            "configuration": "debug",
+            "preLaunchTask": "swift: Build Debug Rukn"
+        },
+        {
+            "type": "swift",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:mac-utils}",
+            "name": "Release Rukn",
+            "target": "Rukn",
+            "configuration": "release",
+            "preLaunchTask": "swift: Build Release Rukn"
+        }
+    ]
+}

@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 // Copyright (C) 2026 Vorssaint
+// Copyright (C) 2026 Hussaini Holding
 
 import Foundation
 
@@ -52,8 +53,8 @@ enum PreferenceNamespaceTests {
         suite.expect(suiteNames(in: constructor + #""vorss.tests.literal")"#)
                          == ["vorss.tests.literal"],
                      "literal preference suite names are recognized")
-        suite.expect(suiteNames(in: #"let name = "com.vorssaint.tests.local""# + "\n"
-                         + constructor + "name)") == ["com.vorssaint.tests.local"],
+        suite.expect(suiteNames(in: #"let name = "com.hussainiholding.rukn.tests.local""# + "\n"
+                         + constructor + "name)") == ["com.hussainiholding.rukn.tests.local"],
                      "locally declared literal preference suite names are resolved")
         let reusedName = #"let name = "vorss.tests.first""# + "\n"
             + constructor + "name)\n"

@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 // Copyright (C) 2026 Vorssaint
+// Copyright (C) 2026 Hussaini Holding
 
 import AppKit
 import Foundation
@@ -220,7 +221,7 @@ enum MenuPanelRecoveryTests {
             host.popoverWillClose(Notification(name: Notification.Name("willClose")))
             host.popoverDidClose(Notification(name: Notification.Name("closed")))
         }
-        // A close Vorssaint asks for itself, which marks it app requested.
+        // A close Rukn asks for itself, which marks it app requested.
         func requestClose(_ host: Host, _ reason: PanelCloseReason) {
             host.closePopoverNow(animated: false, reason: reason, completion: nil)
             host.popoverWillClose(Notification(name: Notification.Name("willClose")))
@@ -469,7 +470,7 @@ enum MenuPanelRecoveryTests {
         do {
             let host = setup(); NSApp.currentEvent = event(age: 1); close(host)
             expect(!host.popover.isShown && host.handbackReasons == [nil],
-                   "a close Vorssaint did not ask for carries no reason to hand activation back")
+                   "a close Rukn did not ask for carries no reason to hand activation back")
         }
         do {
             let host = setup()

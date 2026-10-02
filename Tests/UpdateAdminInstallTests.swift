@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 // Copyright (C) 2026 Vorssaint
+// Copyright (C) 2026 Hussaini Holding
 
 import Foundation
 
@@ -53,7 +54,7 @@ enum UpdateAdminInstallContract {
             ExtraBrightnessService.shared.onScreen = true
             AdminShell.answer = nil
             let service = Service()
-            service.launchAdminInstaller(appPath: "/Applications/Vorssaint.app", dmgPath: "/tmp/update.dmg",
+            service.launchAdminInstaller(appPath: "/Applications/Rukn.app", dmgPath: "/tmp/update.dmg",
                                          pid: 42, resultPath: "/tmp/update-result", expectedVersion: "9.9.9")
             suite.expect(events == ["prompt"],
                          "the brightness overlay leaves the screen before the prompt holds the main thread")

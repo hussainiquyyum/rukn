@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 // Copyright (C) 2026 Vorssaint
+// Copyright (C) 2026 Hussaini Holding
 
 import AppKit
 
@@ -139,7 +140,7 @@ enum NotchGestureTests {
                && NotchGestureSupport.movement(-1, precise: false, inverted: false) == 24,
                "gesture direction is consistent across natural scrolling and wheel devices")
 
-        let domain = "com.vorssaint.tests.notch-gestures"
+        let domain = "com.hussainiholding.rukn.tests.notch-gestures"
         let defaults = UserDefaults(suiteName: domain)!
         defaults.removePersistentDomain(forName: domain)
         defer { defaults.removePersistentDomain(forName: domain) }

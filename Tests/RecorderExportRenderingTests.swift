@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 // Copyright (C) 2026 Vorssaint
+// Copyright (C) 2026 Hussaini Holding
 
 import AVFoundation
 import AppKit
@@ -242,7 +243,7 @@ enum RecorderExportRenderingTests {
         suite.expect(!RecorderGIFClipboard.publish(fileURL: invalidURL, to: pasteboard)
                 && pasteboard.string(forType: .string) == "keep me",
                      "invalid GIF preparation leaves the existing clipboard untouched")
-        if let artifactPath = ProcessInfo.processInfo.environment["VORSSAINT_RECORDER_FIXTURE_DIR"] {
+        if let artifactPath = ProcessInfo.processInfo.environment["RUKN_RECORDER_FIXTURE_DIR"] {
             let artifactDirectory = URL(fileURLWithPath: artifactPath, isDirectory: true)
             try FileManager.default.createDirectory(at: artifactDirectory,
                                                     withIntermediateDirectories: true)

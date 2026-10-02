@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 // Copyright (C) 2026 Vorssaint
+// Copyright (C) 2026 Hussaini Holding
 
 import Foundation
 
@@ -51,7 +52,7 @@ struct ClipboardHistoryAccessTests {
         let clock = TestClock()
         let deadlines = ManualDeadlineScheduler(clock: clock)
         let lane = GeneralPasteboardAccess(
-            label: "Vorssaint.Tests.ClipboardDeadline",
+            label: "Rukn.Tests.ClipboardDeadline",
             now: clock.read,
             scheduleDeadline: deadlines.schedule
         )

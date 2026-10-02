@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 // Copyright (C) 2026 Vorssaint
+// Copyright (C) 2026 Hussaini Holding
 
 import Foundation
 
@@ -17,7 +18,7 @@ enum NotchKeyboardLightTests {
                 }
             }
         }
-        let domain = "com.vorssaint.tests.notch-keyboard-light"
+        let domain = "com.hussainiholding.rukn.tests.notch-keyboard-light"
         let defaults = UserDefaults(suiteName: domain)!
         defaults.removePersistentDomain(forName: domain)
         defer { defaults.removePersistentDomain(forName: domain) }

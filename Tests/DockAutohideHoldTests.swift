@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 // Copyright (C) 2026 Vorssaint
+// Copyright (C) 2026 Hussaini Holding
 
 import CoreGraphics
 import Foundation
@@ -75,7 +76,7 @@ enum DockAutohideHoldTests {
     }
 
     static func run(_ suite: TestSuite) {
-        let name = "com.vorssaint.tests.dock-hold.\(UUID().uuidString)"
+        let name = "com.hussainiholding.rukn.tests.dock-hold.\(UUID().uuidString)"
         let defaults = UserDefaults(suiteName: name)!
         defer { defaults.removePersistentDomain(forName: name) }
         let marker = DefaultsKey.dockPreviewRestoreAutohide
