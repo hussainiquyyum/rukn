@@ -9,7 +9,7 @@ Mention partial fixes or dependencies on another PR.
 
 List checks actually run and their results, plus anything you could not test.
 Include Mac, macOS, display or language details when relevant to the behavior.
-See the [contribution guide](https://github.com/hussainiquyyum/mac-utils/blob/main/CONTRIBUTING.md#validation) for available checks.
+See the [contribution guide](https://github.com/hussainiquyyum/rukn/blob/main/CONTRIBUTING.md#validation) for available checks.
 
 ## Related issues
 

@@ -85,4 +85,4 @@ This page describes how the current version of Rukn behaves. If the app's behavi
 
 ## Questions
 
-If anything here is unclear, open a question in [GitHub issues](https://github.com/hussainiquyyum/mac-utils/issues), or have a look at [support](../SUPPORT.md).
+If anything here is unclear, open a question in [GitHub issues](https://github.com/hussainiquyyum/rukn/issues), or have a look at [support](../SUPPORT.md).

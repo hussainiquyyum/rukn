@@ -8,8 +8,8 @@ import Foundation
 enum AppInfo {
     static let name = "Rukn"
     static let copyright = "© 2026 Hussaini Holding"
-    static let repositoryURL = URL(string: "https://github.com/hussainiquyyum/mac-utils")!
-    static let issuesURL = URL(string: "https://github.com/hussainiquyyum/mac-utils/issues/new/choose")!
+    static let repositoryURL = URL(string: "https://github.com/hussainiquyyum/rukn")!
+    static let issuesURL = URL(string: "https://github.com/hussainiquyyum/rukn/issues/new/choose")!
 
     /// The bundle version. The fallback only applies to the bare binary
     /// (e.g. `--selftest`), never the shipped app, which reads its Info.plist.

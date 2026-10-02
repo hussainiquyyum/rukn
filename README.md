@@ -20,9 +20,9 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/hussainiquyyum/mac-utils/releases"><img src="https://img.shields.io/github/v/release/hussainiquyyum/mac-utils?label=release&color=4c8dff" alt="Latest release"></a>
-  <a href="https://github.com/hussainiquyyum/mac-utils/releases"><img src="https://img.shields.io/github/downloads/hussainiquyyum/mac-utils/total?color=4c8dff" alt="Downloads"></a>
-  <a href="https://github.com/hussainiquyyum/mac-utils/actions/workflows/ci.yml"><img src="https://github.com/hussainiquyyum/mac-utils/actions/workflows/ci.yml/badge.svg?branch=main&event=push" alt="CI status"></a>
+  <a href="https://github.com/hussainiquyyum/rukn/releases"><img src="https://img.shields.io/github/v/release/hussainiquyyum/rukn?label=release&color=4c8dff" alt="Latest release"></a>
+  <a href="https://github.com/hussainiquyyum/rukn/releases"><img src="https://img.shields.io/github/downloads/hussainiquyyum/rukn/total?color=4c8dff" alt="Downloads"></a>
+  <a href="https://github.com/hussainiquyyum/rukn/actions/workflows/ci.yml"><img src="https://github.com/hussainiquyyum/rukn/actions/workflows/ci.yml/badge.svg?branch=main&event=push" alt="CI status"></a>
   <a href="#what-you-need"><img src="https://img.shields.io/badge/macOS-14%2B%20Apple%20Silicon-black" alt="macOS 14 and newer, Apple Silicon"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-GPL--3.0--or--later-blue" alt="License GPL 3.0 or later"></a>
 </p>
@@ -155,7 +155,7 @@ With [Homebrew](https://brew.sh):
 brew install --cask rukn
 ```
 
-Or grab the disk image from the [releases page](https://github.com/hussainiquyyum/mac-utils/releases) and drag Rukn into Applications.
+Or grab the disk image from the [releases page](https://github.com/hussainiquyyum/rukn/releases) and drag Rukn into Applications.
 
 Builds are signed with an Apple Developer ID and notarized, so macOS opens them without a fuss and your permissions survive updates.
 
@@ -193,7 +193,7 @@ See the [permissions guide](docs/PERMISSIONS.md) for which features need access 
 ### Build it yourself
 
 ```sh
-git clone https://github.com/hussainiquyyum/mac-utils.git
+git clone https://github.com/hussainiquyyum/rukn.git
 cd rukn-utils
 ./build.sh --dev            # build the separate Developer variant
 ./build.sh --dev --install  # install and launch it

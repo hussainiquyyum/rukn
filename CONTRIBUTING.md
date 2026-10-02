@@ -11,7 +11,7 @@ dependencies. `Package.swift` supports editor indexing; it does not assemble or
 sign the app bundle.
 
 ```sh
-git clone https://github.com/hussainiquyyum/mac-utils.git
+git clone https://github.com/hussainiquyyum/rukn.git
 cd rukn-utils
 ./build.sh --dev
 ./build/RuknDeveloper --selftest
@@ -97,7 +97,7 @@ a stable release carries the fix, and can close the issue after two weeks withou
 a response. If the PR addresses only part of an issue, say exactly which part.
 
 For agent-assisted work, see [contributing with an agent](docs/AI-CONTRIBUTIONS.md).
-Bug reports and feature requests use the [issue forms](https://github.com/hussainiquyyum/mac-utils/issues/new/choose).
+Bug reports and feature requests use the [issue forms](https://github.com/hussainiquyyum/rukn/issues/new/choose).
 Report vulnerabilities through [private security reporting](SECURITY.md).
 
 ## Releases (maintainers)
